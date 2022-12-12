@@ -1,0 +1,50 @@
+﻿@page
+@model OnlineShoppingCart.Areas.Identity.Pages.Account.Manage.Roles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/SOP_Purple_Layout_Login.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetRoles[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetRoles[0].NormalizedName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetRoles[0].ConcurrencyStamp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model !=null && Model.AspNetRoles1!=null)
+@foreach (var item in Model.AspNetRoles1) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NormalizedName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
+            </td>
+            <td>
+                <a href="Roles/Edit?Id=@item.Id">Edit</a>|
+                <a href="Roles/Details?Id=@item.Id">Details</a>|
+                <a href="Roles/Delete?Id=@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

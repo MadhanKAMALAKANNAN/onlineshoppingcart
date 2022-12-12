@@ -1,0 +1,36 @@
+﻿@page
+@*@model OnlineShoppingCart.Pages.CartModel*@
+
+@{
+    //ViewData["Title"] = "Cart";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Cart</h1>
+<!-- Title Page -->
+	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
+		<h2 class="l-text2 t-center">
+			Cart
+		</h2>
+	</section>
+
+	<!-- Cart -->
+	<section class="cart bgwhite p-t-70 p-b-100"> 
+				
+<div id="idDivCartItems"> 
+</div>
+	</section>
+
+<script>
+		  
+	  $(document).ready(function() { 
+	
+		console.info('...update cart....');
+
+		UpdateCart(0) ;   
+	  
+		console.info('sdsdsfd');//$("#idDivCartItems").html());
+
+	  });
+	  	    
+  </script>

@@ -1,0 +1,471 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+ 
+<h1>@ViewData["Title"]</h1>
+ 	<style>
+.form-group,.form-group{
+						min-width:250px;max-width:700px;
+						 color:gray !important;   
+                        __background-color:aliceblue;
+                        left:25px;
+                        ___margin:1.5px  !important;
+                        padding:5px !important;
+                        
+			}
+			 
+            .swal-title1,.swal-title1{
+            padding:5px 05px;
+            color:#fff;
+            font-size:larger;
+            }
+             .swal-modal1
+             {   
+                  background-color:rebeccapurple  ;
+			}
+             
+            .form-control{
+                    min-width:150px  ; max-width:350px  ;
+                transition:none;
+                   background-color:dimgrey;
+                  background-color: darkgray !important;
+               
+            }
+            .swal-text1{
+                 
+                _padding-bottom:15px;
+                padding-left:15px;
+            }
+            .clsRemember,.mr-2{
+                   color:white;   
+                   
+            }   
+            .swal-modal1, .swal-modal1
+            {
+                  min-width:400px;max-width:700px;
+                    min-height:400px;max-height:450px;  
+                   visibility: ;
+                   position: absolute;
+                    _left: 0;
+                    _top: 80%;
+                    width: 25%;   
+                    _height: 100%;   
+                    text-align: center;
+                    z-index: 1000;
+                     _width: 350px;
+                        _height: 65%;
+                        _margin: 100px auto;
+                        _background-color: #6ed1d8;
+                        border-radius: 20px;
+                        -webkit-border-radius: 20px;
+                        -moz-border-radius: 20px;
+                        border: 1px solid #6ed1d8;
+                        _padding: 5px 0 0 0;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 15px;
+                        border: 3px solid #6ed1d8;
+                        __position: absolute;
+                        left: 45%;
+                        top: 255px;
+                        transform: translate(-35%, -35%);
+                        -ms-transform: translate(-35%, -35%);
+                        -webkit-transform: translate(-35%, -35%);    
+
+            }
+
+  .overlay {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2213112;
+  cursor: pointer;
+}
+.devider{
+    _padding-top:10px;
+    font:large;
+    color:#888;  
+    padding-right:50px;
+}
+.div-table {
+  display: table;         
+  width: auto;  
+ __background-color: #eee;         
+  __border: 1px solid #666666;         
+  border-spacing: 5px; /* cellspacing:poor IE support for  this */
+  padding-left:70px;
+}
+.div-table-row {
+  display: table-row;
+  width: auto;
+  clear: both;
+}
+.div-table-col {
+  float: left; /* fix for  buggy browsers */
+  display: table-column;         
+  width: 110px;         
+  _background-color: #888; 
+ 
+}
+.div-table-col>a{
+        color:#fff;
+}
+ 
+
+
+/*div >.theTooltip {
+    position: relative;
+ 
+    min-width:250px;
+    max-width: 450px;
+    min-height:20px;
+    max-height:25px;
+    top:-70px;
+    text-align:justify;
+    left:45% !important    ; 
+    font-size:x-small;
+    font-family:Kalinga;
+    text-align:center !important;
+   
+}*/
+
+.theTooltip {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    _-ms-backface-visibility: hidden;
+    _-o-backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity, visibility;
+
+min-width:350px;max-width:790px !important;  
+
+    border-radius: 5px;
+    background-color:#d10000 ;
+    padding: 1px;
+    color: #fff;
+    box-sizing: border-box;
+    display: inline-block; 
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(15%, -50%);
+    transform: translate(15%, -50%);
+ 
+      top:-22px;  
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+    visibility:hidden ;
+    margin: 0;
+    opacity: 1;
+    -webkit-transition: opacity 1.3s ease-out;
+    transition: opacity 1.3s ease-out;
+    z-index: 10020;  
+    font-family:kalinga;
+    font-size-adjust:inherit;
+    font-size: x-small   ;
+ }
+
+.theTooltip1 {
+      -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    _-ms-backface-visibility: hidden;
+    _-o-backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity, visibility;
+
+min-width:350px;max-width:790px !important;  
+
+    border-radius: 5px;
+    background-color:#d10000 ;
+    padding: 1px;
+    color: #fff;
+    box-sizing: border-box;
+    display: inline-block; 
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(15%, -50%);
+    transform: translate(15%, -50%);   
+     top:-22px;   
+    left: auto;
+    right: auto;
+    bottom: auto;
+    visibility: ;
+    margin: 0;
+    opacity: 1;
+    -webkit-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+    z-index: 10002;  
+    font-family:Kartika;
+    font-size-adjust:inherit;
+      font-size:12px   ;
+}
+/*
+    .theTooltip:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        margin-top: -10px;
+        margin-bottom: -10px;
+        left: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid rgba(0,0,0,0.7);
+    }*/
+
+    .theTooltip:after  {  
+    position: absolute;
+    bottom: 0;
+    right:90%;
+    content: '';
+    width: 0;
+    height: 0;
+    top:auto;
+    border-style: solid;
+    border-width: 11px 11px 0 11px;
+    border-color: #d10000 transparent transparent transparent;
+    margin-right: 8px;
+    margin-bottom: -5px;
+}
+  
+    .theTooltip1:after  {
+         
+    position: absolute;
+    bottom: 0;
+    right:90%;
+    content: '';
+    width: 0;
+    height: 0;
+    top:auto;
+    border-style: solid;
+    border-width: 11px 11px 0 11px;
+    border-color: #d10000 transparent transparent transparent;
+    margin-right: 8px;
+    margin-bottom: -5px;
+}
+
+input {
+    background: #fff;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    overflow: visible;
+    margin: 10px;
+    outline: 0;
+    vertical-align:central;
+    text-decoration: none;
+    __width: auto;
+    border-radius: 3px;
+    cursor: text;
+    padding: 7px;
+}  
+    input:focus,
+    input:active {
+        outline: none;
+    }
+  .btn,.btn-primary,.btn-primary{
+   padding-left:35px;
+   padding-right:35px;
+  margin-right:45px;
+
+  }
+  body{
+
+      line-height:0.0px !important;
+  }
+  <!------------------>
+/*   input:invalid ~ .theTooltip {
+        visibility: visible;
+        opacity: 1;
+        display: ;
+ 
+    padding:0px !important;
+    margin:0px !important;
+    left:250px;
+
+    }*/
+  <!-------------------
+/*.submitted input:invalid {
+    border: 1px solid #f00;
+      visibility: visible;
+        opacity: 1;
+        display: ;
+}*/
+
+   /* .submitted input:invalid ~ .theTooltip {
+        visibility: visible;
+        opacity: 1;
+        display: ;
+ 
+    padding:0px !important;
+    margin:0px !important;
+    left:250px;
+
+    }*/
+
+/*.submitted input:valid ~ .theTooltip {
+    -webkit-transition: opacity 1.3s, visibility 1s 1.3s;
+    transition: opacity 1.3s, visibility 1s 1.3s;
+         __visibility: visible;
+        opacity: 1;
+        display: ;
+    left:250px;
+}
+    */
+ .td
+ {
+   display: table-cell;
+ }
+
+ .colspan3
+ {
+   width: 260px;
+   padding-left:145px;           
+ }
+
+ .rowspan5
+ {
+   height: 500px; 
+ }
+     </style>
+ 	 
+<div id="divLoginModal" style="display:;" class="overlay" tabindex11="-1">
+  <div class="swal-modal1"  style="">
+ 
+            <div class="swal-title1" style="">
+            Create a new account
+            </div>  <hr />   
+
+              <form id="frms1" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+   
+           @* <div asp-validation-summary="All" class="text-danger"></div>*@
+            <div class="form-group_" style="height:45px;">
+                   
+                <input asp-for="Input.Email" style="width:295px" class="form-control_" placeholder="Email"   required="required"  onkeypress="ShowHideerrors('#spnErrorEmail')"  onblur="ShowHideerrors('#spnErrorEmail')"  />
+                <span id="spnErrorEmail" asp-validation-for="Input.Email"   class="theTooltip"  ></span>          
+            </div>
+            <div class="form-group_" style="height:45px;">
+               @* <label asp-for="Input.Password"></label> *@            
+                <input asp-for="Input.Password"  style="width:295px"  class="form-control_" placeholder="Password"  required="required"  onkeypress="ShowHideerrors('#spnErrorPassword')"  onblur="ShowHideerrors('#spnErrorPassword')"  />
+                <span asp-validation-for="Input.Password" class="theTooltip" id="spnErrorPassword" ></span>                           
+            </div>
+            <div class="form-group_" style="height:45px;">
+                
+                <input asp-for="Input.ConfirmPassword" style="width:295px"  class="form-control_" placeholder="Confirm Password"  required="required" onkeypress="ShowHideerrors('#spnErrorConfirmPassword')"   onblur="ShowHideerrors('#spnErrorConfirmPassword')"  />
+                <span asp-validation-for="Input.ConfirmPassword" class="theTooltip" id="spnErrorConfirmPassword"></span>
+            </div>
+           <div class="form-group_" style="padding-top:10px !important;margin-top:10px !important;color:white;">  <button type="submit"   onclick="ValidateSubmit1()" onsubmit="ValidateSubmit()">Register</button>     </div>
+       
+           <div class="swal-text1">
+               <p class="w-100 text-center">&mdash; Or Register With &mdash;</p>
+               
+               <div class="div-table">
+                   <div class="div-table-row">
+                       <div class="div-table-col">
+                           <a href="#" class="px-2 py-3 mr-md-1 rounded" style="display:;"><span class="ion-logo-googl1e mr-2">Google</span> </a>
+                       </div>
+                       <div class="div-table-col">
+                           <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"><span class="ion-logo-googl1e mr-2">Microsoft</span></a>
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group_">
+                   <!--  <a href="#" class="px-2 py-3 mr-md-1 rounded" style="display:;"><span class="ion-logo-googl1e mr-2">Google</span> </a> -->
+                   <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"><span class="ion-logo-googl1e mr-2">Back to Login </span></a>
+               </div>
+           </div>   
+
+            </form>    
+ 
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+ 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}       
+  </div>
+  
+  </div>
+              
+           <script>  
+          
+               $(document).ready( function() {
+                //alert('ww' );        $("#divTest").css({"backgroundColor": "black", "color": "Green"});       
+                    //$("<style type='text/css'>#divTest{color:yellow;}</style>").appendTo($("body"));
+                });
+
+                    function ShowHideerrors(erobj)
+                    {
+
+                                  //$("#divTest").html( $(erobj).attr("id") );
+                                  
+                                  //$("#divTest").html(  $(erobj).html() +" ..." +  $(erobj).find("span").html() ); 
+
+
+
+
+                                  if (   $(erobj).html() !="" ||  $(erobj).next("span").html() !="" )    //invalid
+                                  {
+                                      $(erobj).removeClass("theTooltip").addClass("theTooltip1");
+                                        //$("#divTest").css({"backgroundColor": "black", "color": "red"});    
+                                        //  $(erobj).css({"display":"inline"});
+                                        //$(erobj).css({"backgroundColor": "white", "color": "brown"});     
+                                        // $("#divTest").html(  $(erobj).html() +" ..." +  $(erobj).find("span").html() ); 
+                                           
+                                  }
+                                  else  //valid
+                                  {
+                                          $(erobj).removeClass("theTooltip1").addClass("theTooltip");
+                                           //$(erobj).css({"display":"none"});
+                                           //  $(erobj).css({"backgroundColor": "black", "color": "yellow"});    
+                                           // $("#divTest").css({"backgroundColor": "black", "color": "Green"});     
+                                            
+
+                                  }
+
+                                    if ( ($(erobj).html() !=undefined ||  $(erobj).next("span").html() != undefined) )
+                                    {
+                                            ///$(erobj).css({"display":"none"});
+                                              $("#divTest").css({"backgroundColor": "black", "color": "red"});  
+                                    }
+                                    else if( $(erobj).html() !="" )// ||  $(erobj).html() != null )
+                                    {
+                                          // $(erobj).css({"display":""});
+                                             $("#divTest").css({"backgroundColor": "black", "color": "Green"});  
+                                    }
+                                                                                                                 
+                                                                             
+                    }    
+   
+                    function  ValidateSubmit()
+                    {
+                        var cntr=0;
+                        $('span[id^="spnError"]').each(function (el) {
+                             cntr++;
+                                  $("#divTest").html("Count:"+ cntr +" Element: "+$(this).attr("id"));   
+                                ShowHideerrors("#"+$(this).attr("id"));
+                                 
+                       });
+                    }
+
+    </script>

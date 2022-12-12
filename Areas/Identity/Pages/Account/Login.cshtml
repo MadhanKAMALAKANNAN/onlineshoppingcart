@@ -1,0 +1,139 @@
+﻿@page
+@model LoginModel
+
+<link href="~/Css/ValidationsToolTips.css"/>
+ 	<style> 
+    
+ .td
+ {
+   display: table-cell;
+ }
+
+ .colspan3
+ {
+   width: 260px;
+   padding-left:145px;           
+ }
+
+ .rowspan5
+ {
+   height: 500px; 
+ }
+     </style>
+ 
+<div id="divLoginModal" style="display:;" class="overlay" tabindex11="-1">
+  <div class="swal-modal1"  style="display: ">
+ 
+  <div class="swal-title1" style="">
+	  Login
+  </div>  <hr />    
+                <form id="account" method="post">  
+ @*       <div id="divEmail">
+            <label>Email</label>
+            <input type="email" required="required" /><span class="theTooltip">Invalid email..</span>
+        </div>
+          <div id="divEmail1">
+            <label>Email1</label>
+            <input type="email" required="required" /><span class="theTooltip">Invalid email11..</span>
+        </div>
+        <div>
+            <button type="submit" formnovalidate="formnovalidate">OK</button>
+        </div>*@
+         <!--------------------------------->
+              
+               @* <div asp-validation-summary="All" class="text-danger"></div>*@
+                <div class="form-group">
+                 @*   <label asp-for="Input.Email"></label>*@
+                    <input asp-for="Input.Email" class="form-control_" style="width:295px"  required="required"   placeholder="Email"/>  
+                    <span asp-validation-for="Input.Email"  class="theTooltip" style="display:" ></span>
+                   
+@*                         <input type="email" required="required" /><span class="theTooltip">Invalid email..</span>*@
+                </div>
+                <div class="form-group">
+                   @* <label asp-for="Input.Password"></label>*@
+                    <input asp-for="Input.Password" style="width:295px" class="form-control_"   required="required"   placeholder="Password"/>  
+                    <span asp-validation-for="Input.Password"  class="theTooltip" style="display:" ></span>
+                      
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe"  />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group_">
+                    <button type="submit" style="width:195px;color:white"  >Log in</button>
+                </div>
+                <div class="swal-text1">
+                    <div class="form-group">
+                        <p style="align-self:center;;text-align:center;padding-left:0%;padding-top:5px">&mdash; Register With &mdash;</p>
+                        </div>
+                        <div class="div-table">
+                            <div class="div-table-row">
+                                <div class="div-table-col">
+                                    <a href="#" class="px-2 py-3 mr-md-1 rounded" style="display:;"><span class="ion-logo-googl1e mr-2">Google</span> </a>
+                                </div>
+                                <div class="div-table-col">
+                                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"><span class="ion-logo-googl1e mr-2">Microsoft</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="align-self:center;text-align:center;padding-left:0%;">&mdash;Or &mdash;</p>
+                        <div class='td_ _colspan3 _rowspan5_'> <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><span class="ion-logo-googl1e mr-2">Register</span></a>   </div>
+
+                    </div>
+
+
+
+</form>
+         <!--------------------------------->
+    <script>
+        document.querySelector('form').addEventListener('submit', e => {
+           //e.preventDefault();
+            e.currentTarget.classList.add('submitted');
+        });
+    </script>
+
+		       
+			 
+ <script>
+		
+        // Alert Redirect to Another Link
+    $(document).ready( function (e) {
+        //swal({
+        //    title: "Are you sure?",
+        //    text: "You will be redirected to 
+        //    type: "warning",
+        //    confirmButtonText: "Yes, visit link!",
+        //    showCancelButton: true
+        //})
+            //.then((result) => {
+            //    if (result.value) {
+            //        window.location = 'https:// .io';
+            //    } else if (result.dismiss === 'cancel') {
+            //        swal(
+            //            'Cancelled',
+            //            'Your stay here :)',
+            //            'error'
+            //        )
+            //    }
+            //})
+    });
+</script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+ 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+ 
+
+  </div></div>
+  
+ 

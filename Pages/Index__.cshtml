@@ -1,0 +1,42 @@
+﻿@page
+@model OnlineShoppingCart.Pages.IndexModel
+@{ Layout = "SOP_Purple_Layout_Login"; }
+ 
+ <link rel="stylesheet" href="~/assets/css/Products.css" />
+ 
+ 
+        <div class="Table">  
+            <div class="Title">  
+                <p>  
+               Products Lists</p>  
+            </div>  
+  @*          <div class="Heading">  
+                <div class="Cell">  
+                    <p>  
+                    FirstName</p>  
+                </div>  
+                <div class="Cell">  
+                    <p>  
+                    LastName</p>  
+                </div>  
+                <div class="Cell">  
+                    <p>  
+                    Age</p>  
+                </div>  
+            </div>*@  
+    @foreach (var item in Model.products)    
+        {  
+           <div class="Row">
+                <div class="Cell">
+                   <img src="@item.ProductPic" class="productImg"/>
+                       <div>   @Html.DisplayFor(modelItem => item.Price)</div>
+                    </div>
+                 <div class="Cell">
+                         @Html.DisplayFor(modelItem =>  item.Description)
+                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.ActivationCodes)
+                </div>  
+           </div>
+           
+             }
+        </div>   

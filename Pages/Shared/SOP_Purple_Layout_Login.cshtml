@@ -1,0 +1,183 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+ 
+    <meta name="google-signin-client_id" content="297743793771-ulrhk8bjp0uib21n3tr8pqjcqckt8r4o.apps.googleusercontent.com"/>@*   content="834268371810-kgs6l320h22qpknjh2i1k9hb4h2seasp.apps.googleusercontent.com">*@
+    @*<link href="~/css/SOP_Purple.css" rel="stylesheet" />*@
+    <title>Hyperspace by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+        <link rel="stylesheet" href= "/css/jquery-ui.css" />
+    <noscript><link rel="stylesheet" href="~/assets/css/noscript.css" /></noscript>    
+          <script src="/js/angular.js"></script>
+            <script src="/js/UtilsShoppingCart.js"></script>      
+            <script src="/js/ShoppingCart.js"></script>  
+      <script src="/js/jquery-1.12.4.js"></script>  
+ 
+<link rel="stylesheet"
+      type="text/css"
+      href="/css/jquery-confirm.css" />
+<script type="text/javascript"
+        src="/js/jquery-confirm.js"></script>
+ 
+    <style>
+        button {
+            margin: 0.2em 0 0.2em 6.5em;
+            padding: 0 4.05em;
+        }
+
+        #intro p {
+            font-size: 0.95em;
+        }
+
+        p {
+            margin: 0 0 0.2em 0;
+        }
+
+        .form-group {
+            margin-bottom: 0.4rem;
+        }
+
+        h4 {
+            font-size: 0.8em;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #1b6ec2;
+            border-color: #1861ac;
+            height: 2.3em;
+        }
+ 
+.ui-button, .ui-button:link, .ui-button:visited, .ui-button:hover, .ui-button:active {
+    text-decoration: none;
+    font-family:Kalinga;
+    width: 120px;
+    height: 35px;
+    font-size:10px !important;
+    background-color:#8d59bd !important;
+    color:#fff;
+}
+.ui-dialog-title,.ui-dialog-title,.ui-widget-header{
+          background-color:#8d59bd !important;
+    color:#fff;
+}
+
+.table,.table>td,.table>a,p>a,div>label{
+   font-family:Kalinga;
+   color:#fff;
+     font-size:14px !important;
+}
+.table{
+ width:80%;
+}
+ a {
+    font-size: 14px;
+    font-family: Kalinga;
+}
+
+</style>
+</head>
+<body class="is-preload_0">
+    <!-- Sidebar -->
+    <section id="sidebar">
+            @*          <form id="frm1">   *@
+        <div class="inner">
+       
+            <nav>
+                          <ul class="navlink1">
+                           @if(User!=null)
+                           { 
+                               IdentityUser user1 = UserManager.GetUserAsync(User).Result;
+                                bool isInrole1 = user1!=null?UserManager.IsInRoleAsync(user1, "Admin").Result:false;  
+
+                               @if(isInrole1)
+                               {
+                                   <li><a href="~/Identity/Account/Manage/Roles">Manage Roles</a></li>
+                                   <li><a href="~/Identity/Account/Manage/UserRoles">Manage Users Roles</a></li>
+                                   <li><a asp-action="Index" asp-controller="Products"  >Manage Products</a></li>
+                                      
+
+                               }
+                           }
+                    @*<li style="border-color:rebeccapurple;border-style:;border-width:1px"> </li>*@
+                    </ul>
+           
+                 <div>
+
+
+</div>
+           
+
+                <ul>
+                @if(SignInManager.IsSignedIn(User) )
+                {
+                <form class="form-inline" asp-area="Identity"  asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="nav-link0 btn0 btn-link0 text-dark0">Logout</button>
+                </form>
+                         
+                @*<span> User Admin:@isInrole1  </span> *@
+    
+
+                <li><a href="#intro"> Shop By Category</a></li>
+    
+                <li><a href="~/index">Home</a></li>
+    
+                <li><a href="~/product">Shop</a></li>
+                }
+                else
+                {
+                <li class="nav-item">
+                <a class="nav-link text-dark_" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-dark_" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                </li>
+
+                }
+
+                </ul>
+            </nav>
+        </div>
+   @*     </form>*@
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner__">
+            @*    <h1>Hyperspace</h1>
+                    <p>
+                        Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
+                        and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.
+                    </p>
+                    <ul class="actions">
+                        <li><a href="#one" class="button scrolly">Learn more</a></li>
+
+                    </ul>*@
+
+                <div class="container">
+             
+                    @RenderBody()
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

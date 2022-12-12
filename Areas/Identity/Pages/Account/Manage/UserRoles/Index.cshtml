@@ -1,0 +1,121 @@
+﻿@page
+@model OnlineShoppingCart.Areas.Identity.Pages.Account.Manage.UserRoles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/SOP_Purple_Layout_Login.cshtml";
+}
+  
+<h1>Index</h1>
+          
+<p>
+    <a asp-page="edit">Create New</a>
+</p>
+ 
+<table class="table"  >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.aspNetUSerRoles1[0].RoleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.aspNetUSerRoles1[0].UserId)
+            </th>
+       
+        </tr>
+    </thead>
+     
+    <tbody>
+          
+@if(Model!=null && Model.aspNetUSerRoles1!=null)
+@foreach (var item in Model.aspNetUSerRoles1) {  
+        <tr>    
+            <td>
+                    @Html.DisplayFor(modelItem => item.RoleId) : @Model.aspNetRoles.Where(x => x.Id == item.RoleId).FirstOrDefault().Name;    
+            </td>                                                                          
+            <td>  
+                  @Html.DisplayFor(modelItem => item.UserId)  : @Model.aspNetUSers.Where(x => x.Id == item.UserId).FirstOrDefault().Email;
+               <td>
+                <a href="UserRoles/Edit?Id=@item.UserId">Edit</a>|
+                <a href="USerRoles/Details?Id=@item.UserId">Details</a>|
+            @*    <a href="#"  onclick="RecDelete('@item.UserId','@item.RoleId')" >Delete Jquery</a>*@
+              @*  <a id="anchDeletewq" asp-page="index" asp-page-handler="Delete" asp-route-userId='@item.UserId' asp-route-roleId='@item.RoleId'  onclick='return ConfirmDelete("@item.UserId","@item.RoleId")' >Delete</a> *@  
+                <a id="anchDelete"   onclick='return ConfirmDelete("@item.UserId","@item.RoleId")' >Delete</a>           
+        </tr>   
+}                 
+    </tbody>                                                                          
+
+</table>
+    
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+
+    <a id="dialog-confirm"  title="Delete?" style="display:none;">  Confirm   
+     </a>
+  
+        @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+       
+    <script>
+                                                                                            
+        function ConfirmDelete(uid,rid) {
+
+               $(function () {
+                $("#dialog-confirm").dialog({
+                    resizable: true,
+                    height: "auto",
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {  
+                            OkDelete(uid,rid);
+                           $(this).dialog("close"); return true;
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                          
+                        }
+                    }
+                });
+            });
+                             
+            
+            return false;
+        }
+
+         function OkDelete(uid,rid) {
+                   
+                      var antiForgeryToken =     $('input:hidden[name="__RequestVerificationToken"]').val()      ;
+                       //  alert(rid + "......"+ antiForgeryToken)  ;
+
+                       $.ajax({ 
+                      type: "Get", 
+                        url: '/Admin/Delete', //      'Index?handler=Delete'  , /* 
+                          headers: { 'RequestVerificationToken': antiForgeryToken },
+                        dataType: 'json',  
+                        data: { userId: uid, roleId: rid},
+                        //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',   
+                        contentType: "application/json; ",
+        //                beforeSend: function (xhr) {
+        //    xhr.setRequestHeader("XSRF-TOKEN",
+        //        $('input:hidden[name="__RequestVerificationToken"]').val());
+        //},
+                        success: function(response) {
+                        //alert(response) 
+                        },
+                        failure: function (response) {
+                        alert('failure'+ response);
+                        },
+                        error: function (response) {
+                        alert('error'+ response);
+                        }
+
+                }); 
+             }  
+    </script>
+</div>

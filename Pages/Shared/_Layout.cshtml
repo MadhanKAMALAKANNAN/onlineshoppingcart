@@ -1,0 +1,667 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">																					   
+<head>
+<title>Fashe- Sample Site - Alpha(V1.0)</title>
+	<meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+	 	<link rel="stylesheet" href="~/css/font-awesome.min.css">
+
+@*		<link rel="stylesheet" href="~/css/style.css">*@
+		<link rel="stylesheet" href="~/css/ionicons.min.css">
+		 
+		<link rel="stylesheet" href="~/css/Loginmdlstyle.css">
+		<link rel="stylesheet" href="~/css/OnlineShoppingCart.css">
+			<link rel="stylesheet" type="text/css" href="~/vendor/noui/nouislider.min.css">
+	<script src=~/js/ShoppingCart.js></script>
+		<script src="~/js/jquery.min.js"></script>
+	<script src="/js/UtilsShoppingCart.js"></script>
+ 
+<!--===============================================================================================-->
+ 	<link rel="icon" type="image/png" href="~/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/fonts/themify/themify-icons.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/fonts/elegant-font/html-css/style.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->  	 
+  <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.css">	 
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/vendor/lightbox2/css/lightbox.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/css/util.css">
+	<link rel="stylesheet" type="text/css" href="~/css/main.css">
+																		
+ 
+<!--===============================================================================================-->
+ 
+
+
+	<style>
+/*			
+element.style {
+    animation-duration: 1500ms;
+    opacity: 100;
+}
+.animsition,
+.animsition-overlay {
+  position: absolute;
+  opacity:10;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.hide-header-dropdown{
+	  -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+			background-color:#000;
+
+}*/
+.show-header-dropdown {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+	
+}
+.header-cart {
+    position:absolute;
+    z-index: 1100;
+    width: 339px;
+    top: 190%;
+    right: -50px;
+    padding: 20px;
+    border-top: 3px solid #e6e6e6;
+    background-color:forestgreen;
+    box-shadow: 0 3px 5px 0px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 5px 0px rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transform-origin: top right;
+   -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+	display:none;
+}
+ .header-cartShow {
+    position:absolute;
+    z-index: 1100;
+    width: 339px;
+    top: 190%;
+    right: -50px;
+    padding: 20px;
+    border-top: 3px solid ;
+    background-color: white;
+    box-shadow: 0 3px 5px 0px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 5px 0px rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.0s;
+    -webkit-transition: all 0.0s;
+    -o-transition: all 0.0s;
+    -moz-transition: all 0.0s;
+    transform-origin: top right;
+   -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+	background-color:;
+	color:#fff;
+}
+
+/*.header-cart:active  .show-header-dropdown {
+						_display:none;
+		    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+	}*/
+
+	   /*   .header-cart,.show-header-dropdown {
+            display: none_;
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+			background-color:red;
+        }
+*/
+/*
+element.style {
+}
+.header-icons-mobile .header-cart {
+    width: 300px;
+    top: 190%;
+    right: -80px;
+    z-index: 1100;
+    transform-origin: top right;
+}*/
+
+        </style>
+
+</head>
+<body  class="animsition">
+       	<!-- Header -->
+	<header class="header">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="topbar">
+				<div class="topbar-social">
+					<a href="#" class="topbar-social-item fa fa-facebook"></a>
+					<a href="#" class="topbar-social-item fa fa-instagram"></a>
+					<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+					<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+					<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+				</div>
+
+				<span class="topbar-child1">
+					Free shipping for standard order over $100
+				</span>
+
+				<div class="topbar-child2">
+					<span class="topbar-email">
+						fashe@example.com
+					</span>
+
+					<div class="topbar-language rs1-select2">
+						<select class="selection-1" name="time">
+							<option>NZD</option>
+							<option>AUD</option>  
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<img src="~/images/icons/logo.png" alt="IMG-LOGO">
+				</a>
+
+				<!-- Menu -->
+                <div class="wrap_menuws" id="globalTopNsvDiv">
+                    <nav class="menu">
+						  <div class="nestedsidemenuA"></div>
+
+					</nav>
+                    
+					 
+                      <!--  <nav class="menu">
+        <ul class="main_menu">
+            <li>
+                <a href="/index">Home</a>
+                @*	<ul class="sub_menu">
+                <li><a href="index.html">Homepage V1</a></li>
+                    <li><a href="home-02.html">Homepage V2</a></li>
+                    <li><a href="home-03.html">Homepage V3</a></li>
+                </ul>*@
+            </li>
+
+            <li>
+                <a href="/product">Shop</a>
+                <ul class="sub_menu">
+                    <li><a href="/index.html">Men</a></li>
+                    <li>
+                        <a href="/home-02.html">Women</a>
+                        <ul class="sub_menu">
+                            <li><a href="/index.html">WssMen1</a></li>
+                            <li><a href="/home-02.html">Women1</a></li>
+                            <li><a href="/home-03.html">Kids1</a></li>
+                            <li><a href="/home-03.html">Accessories1</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/home-03.html">Kids</a></li>
+                    <li><a href="/home-03.html">Accessories</a></li>
+                </ul>
+            </li>
+
+            <li class="sale-noti">
+                <a href="/product">Sale</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+
+            <li>
+                <a href="/contact">Contact</a>
+            </li>
+        </ul>
+    </nav>-->
+</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+
+							@if(User!=null && SignInManager.IsSignedIn(User) )
+                            {
+                                IdentityUser user1 =  UserManager.GetUserAsync(User).Result;
+                                bool isInrole1 = user1!=null?   UserManager.IsInRoleAsync(user1,"Admin").Result:false;
+
+							<ul class="main_menu">  		 
+								<li>  
+								<img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON"> 
+								<ul class="sub_menu">
+									<li>
+										<a href="~/Admin/Products/index"><span class="clsLogout" > Administration	</span>	  </a>
+                                    </li>
+									<li>
+										<a href="/Identity/Account/Manage/Email">@user1.UserName</a>								
+									</li>
+									<li>
+										<form class="form-inline" asp-area="Identity"  asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+										<button type="submit" class="nav-link1 btn1 btn-link1 text-dark1"><span class="clsLogout" >Logout</span></button>
+										</form>
+									</li>   
+								</ul>
+								</li>
+							</ul>
+								  
+                           }
+						   else
+						   {
+							   <ul class="main_menu">
+								   <li>  
+								<img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON"> 
+								<ul class="sub_menu">
+									<li>
+							  		<a href="/Identity/Account/Login" class="header-wrapicon1 dis-block">
+										<span class="clsLogout" >Login</span>
+									</a>
+									</li>
+									   <li>
+							  			<a href="/Identity/Account/Register" class="header-wrapicon1 dis-block">
+											<span class="clsLogout" >Register</span>
+										</a>
+										</li>
+										</ul>
+								</li>
+								</ul>
+						   }
+				
+
+					<span class="linedivide1"></span>
+
+					<div id="idheaderWrapicon2" class="header-wrapicon2"  >
+						<img src="~/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+						<span id="spanItemCount" class="header-icons-noti">0</span>
+						  <div  id="idheaderCartABC"  class="header-cart header-dropdown"></div>
+ 
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="index.html" class="logo-mobile">
+				<img src="~/images/icons/logo.png" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu">
+				<!-- Header Icon mobile -->
+				<div class="header-icons-mobile">
+					<a href="#" class="header-wrapicon1 dis-block" onclick="LoginModal()">
+						<img src="~/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+					</a>
+
+					<span class="linedivide2"></span>
+			
+					  
+				</div>
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+							Free shipping for standard order over $100
+						</span>
+					</li>
+
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<div class="topbar-child2-mobile">
+							<span class="topbar-email">
+								fashe@example.com
+							</span>
+
+							<div class="topbar-language rs1-select2">
+								<select class="selection-1" name="time">
+									<option>NZD</option>
+									<option>AUD</option>
+								</select>
+							</div>
+						</div>
+					</li>
+
+					<li class="item-topbar-mobile p-l-10">
+						<div class="topbar-social-mobile">
+							<a href="#" class="topbar-social-item fa fa-facebook"></a>
+							<a href="#" class="topbar-social-item fa fa-instagram"></a>
+							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+						</div>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="index.html">Home</a>
+						<ul class="sub-menu">
+							<li><a href="index.html">Homepage V1</a></li>
+							<li><a href="home-02.html">Homepage V2</a></li>
+							<li><a href="home-03.html">Homepage V3</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="product">Shop</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="product">Sale</a>
+					</li>
+
+			
+
+					<li class="item-menu-mobile">
+						<a href="about">About</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+     @*               <partial name="_LoginPartial" />*@
+         
+
+
+	
+    <div class="container" style="min-height:450px;">
+        <main role="main" >
+            @RenderBody() 
+
+
+        </main>																												  f
+    </div>
+			<!-- Footer -->
+	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+		<div class="flex-w p-b-90" style="align-content:center">
+		 <div class="w-size6 p-t-30 p-l-15 p-r-15 respon4">
+				@*<h4 class="s-text12 p-b-30">
+					GET IN TOUCH
+				</h4>
+
+				<div>
+					<p class="s-text7 w-size27">
+						Any questions? Let us know in store at Your Company Address.
+					</p>
+
+					<div class="flex-m p-t-30">
+						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
+						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
+						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+					</div>
+				</div>*@
+			</div> 
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Categories
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Men
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Women
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Dresses
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Sunglasses
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Links
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Search
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							About Us
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Contact Us
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Returns
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+				<h4 class="s-text12 p-b-30">
+					Help
+				</h4>
+
+				<ul>
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Track Order
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Returns
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							Shipping
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="#" class="s-text7">
+							FAQs
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+				<h4 class="s-text12 p-b-30">
+					Newsletter
+				</h4>
+
+				<form>
+					<div class="effect1 w-size9">
+						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
+						<span class="effect1-line"></span>
+					</div>
+
+					<div class="w-size2 p-t-20">
+						<!-- Button -->
+						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+							Subscribe
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<div class="t-center p-l-15 p-r-15">   
+
+			<a href="#">
+				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
+			</a>
+
+			<a href="#">
+				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
+			</a>	  
+		 
+			<div class="t-center s-text8 p-t-20">
+				    &copy; @DateTime.Now.Year  - All rights reserved. Fashe- Sample Site - Alpha(V1.0) - <a asp-area="" asp-page="/Privacy">Privacy</a>
+			
+			</div>
+		</div>
+	</footer>
+  
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+		<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+	</div>
+	 	 <div id="idheaderCartTemp"> </div>
+	<!-- Container Selection1 -->
+	<div id="dropDownSelect1"></div>
+	 
+
+
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript" src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript">
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/slick/slick.min.js"></script>
+	<script type="text/javascript" src="~/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/lightbox2/js/lightbox.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="~/vendor/sweetalert/sweetalert.min.js"></script>
+	<script type="text/javascript">	  
+	var querystring = window.location.href;
+ 
+	$(document).ready(function () {
+		console.log("adminUser1@oneText.co.nz");
+            
+		if (querystring.indexOf('cart?noaddtocart') > -1) {
+
+		}
+		else
+		{
+			AddtoCart("0");
+		}
+
+		//TopNavMenu();
+	});	   
+
+		$("#idheaderWrapicon2").click(function(){	 
+			if (querystring.indexOf('cart?noaddtocart') > -1) {
+				// $("#idheaderCartABC").Hide();
+				} 
+			$("#idheaderCartABC").toggleClass("header-cartShow header-cart");   
+		})	;	  
+
+	
+	</script>
+
+<!--===============================================================================================-->
+	<script src="~/js/main.js"></script>
+
+
+
+</body>
+</html>

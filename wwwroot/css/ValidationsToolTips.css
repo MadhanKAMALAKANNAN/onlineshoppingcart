@@ -1,0 +1,92 @@
+﻿ 
+
+
+#divEmail > span {
+    position: relative;
+    margin: -50px 0 0px 59px;
+    top: -55px;
+    left:90px;
+
+    display:none;
+}
+
+.theTooltip {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    _-ms-backface-visibility: hidden;
+    _-o-backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity, visibility;
+    max-width: 250px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 15px;
+    color: #fff;
+    box-sizing: border-box;
+    display: inline-block;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(15%, -50%);
+    transform: translate(15%, -50%);
+    top: 50%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    visibility: hidden;
+    margin: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+    z-index: 10007070;
+}
+
+    .theTooltip:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        margin-top: -10px;
+        left: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid rgba(0,0,0,0.7);
+    }
+
+input {
+    background: #fff;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    outline: 0;
+    vertical-align: center;
+    text-decoration: none;
+    width: auto;
+    border-radius: 3px;
+    cursor: text;
+    padding: 7px;
+}
+
+    input:focus,
+    input:active {
+        outline: none;
+    }
+
+.submitted input:invalid {
+    border: 1px solid #f00;
+}
+
+    .submitted input:invalid ~ .theTooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.submitted input:valid ~ .theTooltip {
+    -webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+    transition: opacity 0.3s, visibility 0s 0.3s;
+}

@@ -1,0 +1,144 @@
+﻿@page
+@model OnlineShoppingCart.Areas.Identity.Pages.Account.Manage.UserRoles.CreateModel
+
+@{
+    ViewData["Title"] = "Assign User Roles";
+     Layout = "~/Pages/Shared/SOP_Purple_Layout_Login.cshtml";
+}
+<h1>   
+Assign User Role  
+</h1>
+              <script src="/js/AngularDataServices.js"></script>
+               <script src="/js/UserRole.js"></script>
+<h4>AspNetRoles</h4>
+<hr />
+         <form id="frm1" method="post">
+<div class="row">
+    <div class="col-md-4">
+      
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="aspNetUserRoles.UserId"   class="control-label"  ></label>
+                <input asp-for="aspNetUserRoles.UserId" id="roleUserId" class="form-control"  />
+                <span asp-validation-for="aspNetUserRoles.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="aspNetUserRoles.RoleId" class="control-label"></label>
+                <input asp-for="aspNetUserRoles.RoleId"  id="rolRolesId"  class="form-control" />
+                <span asp-validation-for="aspNetUserRoles.RoleId" class="text-danger"></span>
+            </div>
+  <div class="form-group">
+      Users:   @Html.DropDownListFor(x => Model.SelectedUser, new SelectList(Model.Users, "Value", "Text"),  htmlAttributes: new { @class = "form-control", @id = "ddlUsers",  @onchange="ChangeValues(true)" })  
+  </div>  
+  <div class="form-group">
+@*     Roles:    @Html.DropDownListFor(x => Model.SelectedRole, new SelectList(Model.Roles, "Value", "Text"),  htmlAttributes: new { @class = "form-control", @id = "ddlRoles",  @onchange="getRoledetails()" })  *@
+     Roles:    @Html.ListBoxFor(x => Model.SelectedRole,Model.Roles,  htmlAttributes: new { @class = "form-control", @id = "ddlRoles",  @onchange="getRoledetails()" })          
+
+     </div>    
+            <div class="form-group">
+                <input type="submit" value="Assign" class="btn btn-primary" />
+            </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+
+    <input type ="button" onclick="submitF()" value="sbmit"/>
+</div>
+     </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+     
+}
+ <script type="text/javascript">
+// var rolesData = [];
+                
+ 
+//function getRoledetails()
+//{   
+  
+//     ChangeValues(false); 
+//}
+
+</script>
+ 
+
+ @*   <script type="text/javascript">  
+
+        function ChangeValues(flg)
+        {  
+
+            var selUser = $("#ddlUsers").find(":selected").val(); 
+
+        // alert(rolesData.length);
+
+            if(rolesData.length>0)
+            {
+                var selRoleArr = rolesData.filter(x=>x.userId==selUser);
+                    $("#roleUserId").val(selUser);
+                  var selRoleAll ="";    
+                for(var i=0;i<selRoleArr.length;i++)
+                {   
+                    selRoleAll += selRoleArr[i].roleId+","; 
+                   
+                       if(flg)
+                       {     
+                              $('#ddlRoles').find('option').each(function( i, opt ) {  
+                       
+                                // alert("flg:" + flg + selRoleArr[i].roleId +" " + $(opt).val());
+                                if($(opt).val() ==  selRoleArr[i].roleId) 
+                                {
+                                  $(opt).attr('selected', 'true');
+                                }                                               
+                            });                 
+                        }  
+                  }
+              if(flg)
+              {
+                 //$("#rolRolesId").val(selRoleAll);
+              }
+              else
+              {
+                   selRoleAll ="";
+                 // alert('f');
+                  // $("#rolRolesId").val( $("#ddlRoles").find(":selected").val());
+                  $('#ddlRoles').find('option:selected').each(function( i, opt ) 
+                  {  
+                       
+                    selRoleAll += $(opt).val() +"," 
+
+                   });   
+              }
+                   $("#rolRolesId").val(selRoleAll);
+             // alert(flg);
+          }
+         
+        }
+
+        $(document).ready(function () {   
+
+                $.ajax({  
+                    type: "GET",  
+                    url: "/Admin/GetUserRoles",  
+                   contentType: "application/json; charset=utf-8",  
+                    dataType: "json", 
+                    //data:{p1:"test" },
+                    success: function (response) { 
+                     // alert(response)              ;
+                        rolesData = response;
+                        ChangeValues(true); 
+                    },  
+                    failure: function (response) {   
+                        alert("Failure");  
+                    },  
+                    error: function (response) {  
+               
+                        alert("Error");  
+                    }  
+                });  
+                 
+        });  
+
+    </script> *@

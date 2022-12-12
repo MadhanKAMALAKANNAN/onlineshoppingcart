@@ -1,0 +1,292 @@
+﻿ div > .theTooltip {
+    position: relative;
+    min-width: 250px;
+    max-width: 450px;
+    min-height: 20px;
+    max-height: 25px;
+    top: -60px;
+    text-align: justify;
+    left: 45% !important;
+    font-size: x-small;
+    font-family: Kalinga;
+    text-align: center !important;
+}
+body {
+    line-height:0.5px;
+}
+.theTooltip {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    _-ms-backface-visibility: hidden;
+    _-o-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity, visibility;
+    border-radius: 5px;
+    background-color: #d10000;
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    box-sizing: border-box;
+    display: inline-block;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(15%, -50%);
+    transform: translate(15%, -50%);
+    top: 50%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    visibility: hidden;
+    margin: 0;
+    opacity: 0;
+    -webkit-transition: opacity 1.3s ease-out;
+    transition: opacity 1.3s ease-out;
+    z-index: 10007070;
+}
+div > .theTooltip_Alt {
+    position: relative;
+    min-width: 250px;
+    max-width: 450px;
+    min-height: 20px;
+    max-height: 25px;
+    top: -50px;
+    text-align: justify;
+    left: 45% !important;
+    font-size: x-small;
+    font-family: Kalinga;
+    text-align: center !important;
+}
+.theTooltip_Alt{
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    _-ms-backface-visibility: hidden;
+    _-o-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: opacity, visibility;
+    border-radius: 5px;
+    background-color: #d10000;
+    padding:5px 5px 5px 5px;
+    color: #fff;
+    box-sizing: border-box;
+    display: inline-block;
+    position: absolute;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(15%, -50%);
+    transform: translate(15%, -50%);
+    top: 50%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    visibility:;
+    margin: 0;
+    opacity: 1;
+    -webkit-transition: opacity 1.3s ease-out;
+    transition: opacity 1.3s ease-out;
+    z-index: 10007070;
+}
+ 
+    .theTooltip_Alt:after {
+        content: 'sdfS';
+        position: absolute;
+        bottom: 0;
+        right: 88%; 
+        width: 0;
+        height: 0;
+        top: 25px;
+        border-style: solid;
+        border-width: 9px 9px 0 9px;
+        border-color: #d10000 transparent transparent transparent;
+        margin-right: 8px;
+        margin-bottom: -5px;
+        visibility:;
+    }
+.theTooltip:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 88%; 
+    width: 0;
+    height: 0;
+    top: 12px;
+    border-style: solid;
+    border-width: 9px 9px 0 9px;
+    border-color: #d10000 transparent transparent transparent;
+    margin-right: 8px;
+    margin-bottom: -5px;
+    visibility:;
+}
+
+input {
+    background: #fff;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    outline: 0;
+    vertical-align: center;
+    text-decoration: none;
+    __width: auto;
+    border-radius: 3px;
+    cursor: text;
+    padding: 7px;
+}
+
+    input:focus,
+    input:active {
+        outline: none;
+    }
+
+.btn, .btn-primary, .btn-primary {
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-right: 45px;
+}
+
+.submitted input:invalid {
+    border: 1px solid #f00;
+}
+
+    .submitted input:invalid ~ .theTooltip {
+        visibility: visible;
+        opacity: 1;
+        display:;
+        padding: 0px;
+        margin: 0px;
+        left: 250px;
+    }
+
+.submitted input:valid ~ .theTooltip {
+    -webkit-transition: opacity 1.3s, visibility 0s 1.3s;
+    transition: opacity 1.3s, visibility 0s 1.3s;
+    padding: 0px;
+    margin: 0px;
+    left: 250px;
+}
+.header-icons {
+    right: 160px;
+}
+
+.clsLogout {
+    color: white;
+    padding-left: 15px;
+}
+
+.form-group, .form-group {
+    min-width: 250px;
+    max-width: 700px !important;
+    color: gray !important;
+    __background-color: aliceblue;
+    left: 25px;
+    __margin: 0px !important;
+    padding: 0px !important;
+}
+
+.swal-title1, .swal-title1 {
+    padding: 5px 05px;
+    color: #fff;
+    font-size: larger;
+}
+
+.swal-modal1 {
+    background-color: rebeccapurple;
+}
+
+.form-control {
+    min-width: 150px;
+    max-width: 350px;
+    transition: none;
+    background-color: dimgrey;
+    background-color: darkgray !important;
+}
+
+.swal-text1 {
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.clsRemember, .mr-2 {
+    color: white;
+}
+
+.swal-modal1, .swal-modal1 {
+    min-width: 400px;
+    max-width: 700px;
+    min-height: 410px; 
+    position: absolute;
+    _left: 0;
+    _top: 80%;
+    width: 25%;
+    _height: 100%;
+    text-align: center;
+    z-index: 1000;
+    _width: 350px;
+    _height: 65%;
+    _margin: 100px auto;
+    _background-color: #6ed1d8;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border: 1px solid #6ed1d8;
+    padding: 15px 0 0 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    border: 3px solid #6ed1d8;
+    __position: absolute;
+    left: 45%;
+    top: 255px;
+    transform: translate(-35%, -35%);
+    -ms-transform: translate(-35%, -35%);
+    -webkit-transform: translate(-35%, -35%);
+}
+
+.overlay {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2213112;
+    cursor: pointer;
+}
+
+.devider {
+    padding-top: 10px;
+    font: large;
+    color: #888;
+    padding-right: 50px;
+}
+
+.div-table {
+    display: table;
+    width: auto;
+    __background-color: #eee;
+    __border: 1px solid #666666;
+    border-spacing: 5px; /* cellspacing:poor IE support for  this */
+    padding-left: 110px;
+}
+
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+}
+
+.div-table-col {
+    float: left; /* fix for  buggy browsers */
+    display: table-column;
+    width: 90px;
+    _background-color: #888;
+}
+
+    .div-table-col > a {
+        color: #fff;
+    }
