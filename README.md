@@ -1,5 +1,6 @@
 # onlineshoppingcart 
 
+Demo : https://onlineshoppingcart.azurewebsites.net
 user name : adminUser1@oneText.co.nz  , password : adminUser1@oneText.co.nz
 
 
