@@ -1,3 +1,15 @@
+# v0.0.4 (Fri Apr 28 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Delete src directory ([@MadhanKAMALAKANNAN](https://github.com/MadhanKAMALAKANNAN))
+
+#### Authors: 1
+
+- Madhan KAMALAKANNAN ([@MadhanKAMALAKANNAN](https://github.com/MadhanKAMALAKANNAN))
+
+---
+
 # v0.0.3 (Fri Apr 28 2023)
 
 #### ⚠️ Pushed to `main`
