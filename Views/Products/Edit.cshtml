@@ -1,4 +1,10 @@
-﻿@model OnlineShoppingCart.Models.Product
+﻿@*/* Author: Madhan KAMALAKANNAN  ,, Madhan.KAMALAKANNAN@outlook.com ,  Madhan.KAMALAKANNAN@gmail.com
+ Created : Created 29/Aug/2021
+ Modified: 12/Dec/2021  
+ */*@
+
+
+@model OnlineShoppingCart.Models.Product
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,9 +15,7 @@
     Layout = "../../Pages/Shared/SOP_Purple_Layout_Login";
 }
 <h1>Edit</h1>
-
-<h4>Product</h4>
-<hr />
+ 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -51,7 +55,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" style="color:rebeccapurple">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,4 +1,8 @@
-﻿@model System.Collections.Generic.List<OnlineShoppingCart.Models.Product>    
+﻿@*/* Author: Madhan KAMALAKANNAN   , Madhan.KAMALAKANNAN@outlook.com ,  Madhan.KAMALAKANNAN@gmail.com
+ Created : Created 29/Aug/2021
+ Modified: 12/Dec/2021  
+ */*@
+@model System.Collections.Generic.List<OnlineShoppingCart.Models.Product>    
        
 @{
     ViewData["Title"] = "Product List";
@@ -8,25 +12,39 @@
 }  
       <!------------------------------------------------------------------------------------------------------------->        
       <style>
-      a:hover{background-color:rebeccapurple;}
+      a:hover{color:purple  }
       </style>
       <!------------------------------------------------------------------------------------------------------------->
+             @{  int noOfpages =(int) ViewData["TotalPages"];}
+              
 <div ng-app="ShowHideApp" ng-controller="ShowHideController">
+   
      @using(@Html.BeginForm("Index", "Products", FormMethod.Get))  
      {
-        <tabl style=" color:rebeccapurple; padding-top:10px;marigin:0px;"><tr><td><a asp-action="Create">Create New</a></td><td>|</td><td>
+        <tabl style=" "><tr></tr></tabl> 
+     }
+      <table width="100%"><tr width="100%">
+          <td width="10%" style="text-align:left;color:rebeccapurple !important; padding-top:10px;margin:0px;"><a asp-action="Create"  style="text-align:left;color:rebeccapurple !important;">Create New</a></td>
+          <td width="2%" style="text-align:left;color:rebeccapurple !important;; padding-top:10px;margin:0px;">|</td><td width="*" style="text-align:left;color:rebeccapurple !important;; padding-top:10px;margin:0px;">
                     @if(IsEditAll == "-1")
                     {
-                        <a asp-action="Index"  asp-route-Id="0">Show All</a>
+                        <a asp-action="Index"  asp-route-Id="0"  style="text-align:left;color:rebeccapurple !important;">Show All</a>
                     }
                     else @if(IsEditAll != "-1")
                     {
-                          <a asp-action="Index"  asp-route-Id="-1">Edit All</a>
+                          <a asp-action="Index"  asp-route-Id="-1"  style="text-align:left;color:rebeccapurple !important;">Edit All</a>
                     }
 
-            </td></tr></tabl> 
-     }
-   
+            </td>
+          <td width="50%" style="text-align:right"> 
+             @if(noOfpages>1)
+                   {
+                       @for(int i=0;i<noOfpages;i++)
+                       {
+                         <a asp-action="Index" asp-route-Id="0" asp-route-sortOrder="@ViewData["SortOrder"]"   asp-route-sortParam="@ViewData["SortParam"]" asp-route-currentPage=@i><span style="color:rebeccapurple !important;;font-size:14px;font-weight:bolder"> @(i+1) |</span> </a>           
+                       }  
+                   }
+       </td></tr></table> 
      @* <div ng-show = "IsVisible">*@
      @if(IsEditAll == "-1")
          {
@@ -36,9 +54,11 @@
                             @*  <p> Count : @Model.Count()</p>*@
                         
                 @using(@Html.BeginForm("EditList", "Products", FormMethod.Post))  
-{ 
+
+{      
+
          <table class="table1" style="width:95%;color:rebeccapurple " >
-    <thead style="background-color:rebeccapurple;font-size:12px;vertical-align:central; padding:0;margin:0">
+    <thead style="background-color:rebeccapurple !important;;font-size:12px;vertical-align:central; padding:0;margin:0">
         <tr>
     <th>     
                 @Html.DisplayNameFor(model =>model[0].Name)
@@ -74,11 +94,40 @@
                 <td>@Html.EditorFor(model =>  model[i].Price, new { htmlAttributes = new { @class = "clsPrice"}})</td>
                   <td>  @Html.EditorFor(model =>  model[i].Quantity, new { htmlAttributes = new { @class = "clsPrice"}})</td>
      @*           <td>@Html.EditorFor(model =>  model[i].ProductPic)</td>*@
-     <td><table><tr><td > <div style="margin-left:55px;padding-left:55px"><img src="@Html.DisplayFor(model => model[i].ProductPic)" id = "imglProductPic_@pId"  style="height:75px;width:55px"/></div> <div style="margin-left:55px;padding-left:55px"><label style="color:crimson;width:110px;font-size:12px" for="productPic" onclick="OpenFileBrowser('imgProductPic_@pId','urlProductPic_@pId','imglProductPic_@pId')" >Change Picture</label> </div><span style="display:none">@Html.EditorFor(model =>  model[i].ProductPic,new { htmlAttributes = new { @id = "urlProductPic_"+@pId}})</span> </td><td >  <input type="file"    id="imgProductPic_@pId" style="width:110px;font-size:12px;display:none" /> </td></tr>   </table>
+     <td><table><tr><td> 
+         <div style="margin-left:55px;padding-left:55px">
+              @if( Model[i].ProductPic!= null &&  Model[i].ProductPic != "")
+              {
+                    <img width="260px" height="325px"  src="@Html.DisplayFor(model => model[i].ProductPic)" id = "imglProductPic_@pId"  style="height:75px;width:55px"/>
+              }
+                else
+                    {
+                        <img   width="260px" height="325px"   src="~/images/noimage.jpg" id ="urlProductPic_@pId" style="height:75px;width:55px"/>
+                             
+                    }
+        
+         
+     </div>
+     <div style="margin-left:55px;padding-left:55px"><label style="color:crimson;width:110px;font-size:12px" for="productPic" onclick="OpenFileBrowser('imgProductPic_@pId','urlProductPic_@pId','imglProductPic_@pId')" >Change Picture</label> </div>
+ 
+            @*       // @if( Model[i].ProductPic!= null &&  Model[i].ProductPic != "")*@
+                    @*{*@
+                        <span style="display:none">@Html.EditorFor(model =>  model[i].ProductPic,new { htmlAttributes = new { @id = "urlProductPic_"+@pId}})</span>
+                 @*   }*@
+                   @* else
+                    {
+                        <img   src="~/images/noimage.jpg" id ="urlProductPic_@pId" style="height:75px;width:55px"/>
+                             
+                    }*@
+
+ 
+ </td>
+     
+     <td >  <input type="file"    id="imgProductPic_@pId" style="width:110px;font-size:12px;display:none" /> </td></tr>   </table>
         
                                 </td>  
               
-                </tr>
+        </tr>
          }                        
                <tr style="width:100%;"><td style="margin-left:50%;padding-left:50%">
                   
@@ -98,10 +147,10 @@ else
 {
 @* <div ng-show = "!IsVisible">*@ 
                   
-             <table class="table1" style="width:95%;color:rebeccapurple " >
-    <thead style="background-color:rebeccapurple;font-size:12px;vertical-align:central;">
-        <tr>
-    <th>     
+             <table class="table1" style="width:100%;color:rebeccapurple " >
+    <thead style="background-color:rebeccapurple;font-size:12px;vertical-align:central;padding-top:15px;">
+        <tr >
+    <th width="25%">     
         @{
             var temSortOrder = ViewData["SortOrder"]+"".Trim()=="Asc"?"Desc":"Asc";
         }  
@@ -113,24 +162,25 @@ else
 
                
             </th>
-            <th>
+            <th width="15%"> 
                <a href="#"> @Html.DisplayNameFor(model => model[0].Description) </a>
                      @*  <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrder"]"   asp-route-sortParam="Name" asp-route-currentPage=@ViewData["CurrentPage"]>  </a> *@
               
             </th>
-            <th>
+             <th width="10%"> 
                 <a asp-action="Index" asp-route-sortOrder="@temSortOrder"   asp-route-sortParam="Price" asp-route-currentPage=@ViewData["CurrentPage"]>  @Html.DisplayNameFor(model => model[0].Price) </a> 
                
             </th>
-            <th>
-               <a asp-action="Index" asp-route-sortOrder="@temSortOrder"   asp-route-sortParam="ProductPic" asp-route-currentPage=@ViewData["CurrentPage"]> @Html.DisplayNameFor(model => model[0].ProductPic)</a> 
-               
-            </th>
-            <th>
+                  <th width="5%"> 
             <a asp-action="Index" asp-route-sortOrder="@temSortOrder"   asp-route-sortParam="Quantity" asp-route-currentPage=@ViewData["CurrentPage"]>  @Html.DisplayNameFor(model => model[0].Quantity) </a> 
               
             </th> 
-            <th>  
+  <th width="25%"> 
+               <a asp-action="Index" asp-route-sortOrder="@temSortOrder"   asp-route-sortParam="ProductPic" asp-route-currentPage=@ViewData["CurrentPage"]> @Html.DisplayNameFor(model => model[0].ProductPic)</a> 
+               
+            </th>
+       
+             <th width="15%"> 
               Operations
             </th>
            
@@ -142,68 +192,94 @@ else
                         var j = 0;
                     }
         @foreach (var item in Model)
-        {         
-              
-             if(ViewData["id"]+""==@item.Id+""){
-                  @using(@Html.BeginForm("EditSingleDataList", "Products", FormMethod.Post))  //, new { @enctype = "application/x-www-form-urlencoded" }))  
-                   @*     @using (Html.BeginForm("EditSingleDataList", "Products", FormMethod.Post, new { id = "Form121" }))*@
+                {
+
+                    if (ViewData["id"] + "" == @item.Id + "")
+                    {
+                        @using (@Html.BeginForm(FormMethod.Post))
                         {
-                            <tr class="wrapper.style1-alt" style="background-color:#403168">    
+                             <tr id="trEdit" ___class="wrapper.style1-alt" style="background-color:#403168">    
 
                                 <td>                     
                                     @Html.HiddenFor(model => model[j]) @Html.EditorFor(model => model[j].Name, new { htmlAttributes = new { @class = "asform-control1"}} )</td>
 
                                 <td>@Html.EditorFor(model => model[j].Description)</td>
                                   <td>@Html.EditorFor(model =>  model[j].Price, new { htmlAttributes = new { @class = "clsPrice"}})</td>
+                                  <td>  @Html.EditorFor(model =>  model[j].Quantity, new { htmlAttributes = new { @class = "clsPrice"}})</td> 
                                 <td>
-                                   <table><tr><td> <img src="@item.ProductPic" id = "imglProductPic_@item.Id"  style="height:75px;width:55px"/> <span style="display:none">@Html.EditorFor(model =>  model[j].ProductPic,new { htmlAttributes = new { @id = "urlProductPic_"+@item.Id}} )</span> </td><td><label style="color:crimson;width:110px;font-size:12px" for="productPic" onclick="OpenFileBrowser('imgProductPic_@item.Id','urlProductPic_@item.Id','imglProductPic_@item.Id')" >Change Picture</label>   <input type="file"    id="imgProductPic_@item.Id" style="width:110px;font-size:12px;display:none" /> </td></tr>   </table>
-        
-                                </td>
-                                <td>  @Html.EditorFor(model =>  model[j].Quantity, new { htmlAttributes = new { @class = "clsPrice"}})</td> 
+                                   <table><tr><td>
+                                       
+                                       
+                                @if(@item.ProductPic != null && @item.ProductPic != "")
+                                {
+                                        <img width="260px" height="325px" src="@item.ProductPic" id = "imglProductPic_@item.Id"  style="height:75px;width:55px"/>
+                                }
+                                else
+                                {
+                                        <img width="260px" height="325px"  src="~/images/noimage.jpg" id = "imglProductPic_@item.Id"  style="height:75px;width:55px"/>
+                             
+                                }
 
-                                  <td style="color:white;"> @{ 
-}                           
-                                    <input type="submit" asp-action="EditSingleDataList" style="width:70px;height:25px;font-size:10px" asp-route-id=@item.Id   value="submit"/>  
+                                   
+                                       
+                                       <span style="display:none">@Html.EditorFor(model =>  model[j].ProductPic,new { htmlAttributes = new { @id = "urlProductPic_"+@item.Id}} )</span> </td><td><label style="color:crimson;width:110px;font-size:12px" for="productPic" onclick="OpenFileBrowser('imgProductPic_@item.Id','urlProductPic_@item.Id','imglProductPic_@item.Id')" >Change Picture</label>   <input type="file"    id="imgProductPic_@item.Id" style="width:110px;font-size:12px;display:none" /> </td></tr>   </table>
+        
+                                </td> 
+
+                                  <td style="vertical-align:top;color:white;padding-left:20px;padding-top:2px">  
+                                    <input type="submit" asp-controller="Products" asp-action="EditAt" style="width:70px;height:25px;font-size:10px" asp-route-id="@item.Id"   value="submit"/>
+                                  @*  <input type="submit" style="width:70px;height:25px;font-size:10px" value="submitss"/>  *@
                                     <a asp-action="INdex" asp-route-id="0">Cancel</a> |
                                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                 </td>
                             </tr>
                         }
-                  }
-                else
-                {
-                        string  className = "wrapper.style1";
 
-                        if(j%2 == 0)
+                    }
+                    else
+                    {
+                        string className = "wrapper.style1";
+
+                        if (j % 2 == 0)
                         {
                             className = "wrapper.alt";
                         }
 
-                    <tr class="@className">
+                        <tr class="@className">
 
-                <td>     
-                    @Html.DisplayFor(modelItem => item.Name)
+                            <td width="25%">     
+                                @Html.DisplayFor(modelItem => item.Name)
+
+                            </td>
+
+                            <td width="15%">   
+                                @Html.DisplayFor(modelItem => item.Description)
+
+                            </td>
+                            <td width="5%">   
+                                @Html.DisplayFor(modelItem => item.Price)
+
+                            </td>
+                            <td width="10%">   
+                                @Html.DisplayFor(modelItem => item.Quantity)
+
+                            </td>
+                            <td width="25%">   
+
+                                @if (@item.ProductPic != null && @item.ProductPic != "")
+                                {
+                                    <img width="260px" height="325px" src="@item.ProductPic" id = "imglProductPic_@item.Id"  style="height:auto;width:55px"/>
+                                }
+                                else
+                                {
+                                    <img   width="260px" height="325px" src="~/images/noimage.jpg" id = "imglProductPic_@item.Id"  style="height:auto;width:55px"/>
+                                }
+
                    
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
                  
                 </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.ProductPic)*@
-                    <img src="@item.ProductPic" id = "imglProductPic_@item.Id"  style="height:auto;width:55px"/>
-                 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-      
-                </td>
-                 <td style="color:rebeccapurple;">
+             
+                 <td width="*"  style="color:rebeccapurple;">
                     @*<a asp-action="Index"   asp-route-id="@item.Id" asp-route-otherParams="@System.Net.WebUtility.UrlDecode(@Context.Request.QueryString.Value)">Edit</a>*@ 
                    <a href="index?id=@item.Id&sortOrder=@Context.Request.Query["sortOrder"]&sortParam=@Context.Request.Query["sortParam"]&currentPage=@Context.Request.Query["currentPage"]">Edit</a>|
                    @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
@@ -215,18 +291,18 @@ else
              j++;     
            } </tbody>     </table>
        
-               int noOfpages =(int) ViewData["TotalPages"];
+           
                if(noOfpages>1)
                {
                    for(int i=0;i<noOfpages;i++)
                    {
-                     <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrder"]"   asp-route-sortParam="@ViewData["SortParam"]" asp-route-currentPage=@i>@(i+1)</a>           
+                     <a asp-action="Index" asp-route-Id="0" asp-route-sortOrder="@ViewData["SortOrder"]"   asp-route-sortParam="@ViewData["SortParam"]" asp-route-currentPage=@i><span style="color:rebeccapurple;font-size:14px;font-weight:bolder"> @(i+1) |</span> </a>           
                    }  
                }
                    //ViewData["SortOrder"] = ViewData["SortOrder"] == "Asc" ? "Desc" : "Asc";
             
               @* S:   @ViewData["SortParam"] *@
-      } //end of else
+      } @*//end of else*@
 </div> 
  
  <script type="text/javascript">
