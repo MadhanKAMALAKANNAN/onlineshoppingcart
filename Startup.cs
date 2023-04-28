@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Author: Madhan KAMALAKANNAN  
+ Created : Created 29/Aug/2021
+ Modified: /Dec/2021  
+ Contact : madhan.kamalakannan@gmail.com  or madhan.kamalakannan@outlook.com
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +27,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
  
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using OnlineShoppingCart.Models;
+using Microsoft.AspNetCore.Authentication;
 
 namespace OnlineShoppingCart
 {
@@ -29,13 +37,24 @@ namespace OnlineShoppingCart
         public IEnumerable<KeyValuePair<string, string>> kvPList = null;  
         public KeyValuePair<string, string>[] arrayKP = null; 
 
-        public Startup(IConfiguration configuration)
+       /* public Startup(WebApplicationBuilder builder)//IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = builder.Configuration;
             kvPList =  Configuration.AsEnumerable();
             arrayKP = kvPList.ToArray();
+            ConfigureServices1(builder.Services);
+            Configure1(builder.Build(), builder.Environment);
+        }
+       */
+        public Startup(IConfiguration configuration)
+        {
+            Configuration =configuration;
+            kvPList = Configuration.AsEnumerable();
+            arrayKP = kvPList.ToArray();
+            
         }
 
+        // public ConfigurationManager Configuration { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -48,51 +67,38 @@ namespace OnlineShoppingCart
                 constringName = "AspNetNZDemosContextConnectionLocal";
             }
 
+            
+            services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
            
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddSession();//options => { options.IdleTimeout = TimeSpan.FromSeconds(1000000); });
-            //services.AddDbContext<AsnetidentityContext>(opt =>
-            //opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("Dbconn")));
-            //services.AddDbContext<AsnetidentityContext>(options => options.UseLazyLoadingProxies().UseMySQL(Configuration.GetConnectionString(constringName)));
             var connetionString = Configuration.GetConnectionString(constringName);
+            services.AddDbContext<AsnetidentityContext>(options => options.UseSqlServer(connetionString));
+           // services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AsnetidentityContext>();
 
-            //services.AddDbContext<AsnetidentityContext>(opt =>
-            //opt.UseLazyLoadingProxies().UseSqlServer(connetionString));
+     
 
-            //services.AddDbContext<AsnetidentityContext>(options => options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
+            
+           // services.AddDbContext<AsnetidentityContext>(opt => { opt.UseSqlServer(connetionString, o => o.EnableRetryOnFailure()); });
 
-            services.AddDbContext<AsnetidentityContext>(opt => { opt.UseSqlServer(connetionString, o => o.EnableRetryOnFailure()); });
-
-            services.AddDefaultIdentity<IdentityUser>(options => { options.SignIn.RequireConfirmedAccount = true;}).AddRoles<IdentityRole>().AddEntityFrameworkStores<AsnetidentityContext>();
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                
-                options.ClientId = arrayKP.FirstOrDefault(x => x.Key == "Authentication:Google:ClientId").Value;
-                options.ClientSecret = arrayKP.FirstOrDefault(x => x.Key == "Authentication:Google:ClientSecret").Value;
-                options.ReturnUrlParameter = "/signin-google";
-                options.CallbackPath = "/signin-google";
-
-            });
-            //    .AddMicrosoftAccount(options => {
-
-            //    options.ClientId = arrayKP.FirstOrDefault(x => x.Key == "Authentication:Microsoft:ClientId").Value;
-            //    options.ClientSecret = arrayKP.FirstOrDefault(x => x.Key == "Authentication:Microsoft:ClientSecret").Value;
-            //});
+            //services.AddDefaultIdentity<IdentityUser>(options => { options.SignIn.RequireConfirmedAccount = true;}).AddRoles<IdentityRole>().AddEntityFrameworkStores<AsnetidentityContext>();
+     
+             
 
 
             services.AddAuthorization(options =>
             {
                 options.DefaultPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();  
-                //options.AddPolicy("SiteAdmin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("SiteAdmin", policy => policy.RequireRole("Admin"));
                 
             });
 
             services.AddRazorPages(options =>
             {
-               // options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "SiteAdmin");
+               options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "SiteAdmin");
             }).AddRazorRuntimeCompilation();
-            services.AddApplicationInsightsTelemetry();// AddApplicationInsightsTelemetry();
+            //services.AddApplicationInsightsTelemetry();// AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,50 +117,34 @@ namespace OnlineShoppingCart
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSession();
+            
+           // app.UseSession();
             app.UseEndpoints(endpoints =>
             {
 
-                // endpoints.MapControllerRoute(name: "default", pattern: "/identity/account/login");
+                endpoints.MapControllerRoute(name: "default", pattern: "/identity/account/login");
 
-                //endpoints.MapControllers();
-            
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Login}/{id?}");
+                endpoints.MapControllers();
+
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Login}/{id?}");
 
                 endpoints.MapControllerRoute(
                    name: "Admin",
                    pattern: "Admin/{controller=Products}/{action=Index}/{id?}");
-                //endpoints.MapControllerRoute(
-                //  name: "Admina",
-                //  pattern: "{controller=Products}/Admin/test1/{action=Index}/{id?}");
-
-                //endpoints.MapControllerRoute(
-                // name: "Admina",
-                // pattern: "{controller=Products}/Admin/test1/{action=Index}/{id?}");
 
 
-                ////endpoints.MapControllerRoute(  name: "route for product list", pattern: "Products/Index");
-
-                ////endpoints.MapControllerRoute(
-                ////   name: "route for edit qty list",
-                ////   pattern: "Cart/EditQty/{json?}");
-
-                endpoints.MapRazorPages().RequireAuthorization();
+                endpoints.MapRazorPages();//.RequireAuthorization();
 
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();
 
             });
-           
-            //dbcontext.Database.EnsureDeleted();
-            //dbcontext.Database.EnsureCreated();
-
-            //new DBSeeder(dbcontext);
+ 
+   
         }
     }
 }
