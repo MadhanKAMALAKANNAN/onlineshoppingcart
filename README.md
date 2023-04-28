@@ -24,4 +24,4 @@ Administration Screen
 
 Entity Relationship Diagram Screen 
 
-![This is an image](https://github.com/MadhanKAMALAKANNAN/onlineshoppingcart/blob/main/wwwroot/images/OnlineShoppingCart_SQL_ERD.JPG))
+![This is an image](https://github.com/MadhanKAMALAKANNAN/onlineshoppingcart/blob/main/wwwroot/images/OnlineShoppingCart_SQL_ERD.JPG)
