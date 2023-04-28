@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/* Author: Madhan KAMALAKANNAN   , Madhan.KAMALAKANNAN@outlook.com
+ Created : Created 29/Aug/2021
+ Modified:  /Dec/2021  
+ */
+
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +20,9 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingCart.Controllers
 {
-   
+
     [Authorize(Roles = "Admin")]
+    //[AllowAnonymous]
     public class AdminController :Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -104,22 +111,21 @@ namespace OnlineShoppingCart.Controllers
         {
             IdentityUserRole<string> uroles = await _context.UserRoles.Where(ur => ur.UserId == userId && ur.RoleId == roleId).FirstOrDefaultAsync();
             if (uroles != null) { _context.UserRoles.Remove(uroles);  _context.SaveChanges(); }
-            return  uroles;//  // RedirectToAction(nameof(Index)); 
+            return  uroles;/*//  // RedirectToAction(nameof(Index)); */
         }
 
-        // POST: AdminController/Delete/5
-        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult  Delete(string userId , string roleId ,IFormCollection collection)
+        [HttpGet]
+        public async Task<IdentityRole<string>> DeleteRole(string roleId)
         {
-            try
+            IdentityRole uroles = null;
+            if( _context.UserRoles.Where(ur =>   ur.RoleId == roleId).Count()==0)//if userrole not exist then delete
             {
-                return View(); 
+                uroles = await _context.Roles.Where(ur => ur.Id == roleId).FirstOrDefaultAsync();
+                if (uroles != null) { _context.Roles.Remove(uroles); _context.SaveChanges(); }
             }
-            catch
-            {
-                return View(); 
-            }
+
+            return uroles;/*;//  // RedirectToAction(nameof(Index)); */
         }
     }
 }

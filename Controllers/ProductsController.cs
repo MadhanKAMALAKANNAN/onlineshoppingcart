@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* Author: Madhan KAMALAKANNAN  , Madhan.KAMALAKANNAN@outlook.com
+ Created : Created 29/Aug/2021
+ Modified:  /Dec/2021  
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,14 +17,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json.Linq;
 using OnlineShoppingCart.DB;
 using OnlineShoppingCart.Models;
       
 
 namespace OnlineShoppingCart.Controllers
 {
-   
+    //[AllowAnonymous]
     [Authorize(Roles = "Admin")]
    [Route("/admin/Products/{action}")]
     public class ProductsController : Controller
@@ -58,7 +63,7 @@ namespace OnlineShoppingCart.Controllers
         //[Route("~/admin/products/index")]
         public async Task<IActionResult> Index(int? id,string sortOrder,string sortParam,int currentPage)
         {
-            id = id == null ? 1 : id;
+            id = id == null ? 0 : id;
             ViewData["EditAll"] = id;
             ViewData["productPicurl"] = arrayKP.FirstOrDefault(x => x.Key == "ProductPic:Url").Value;
 
@@ -269,48 +274,17 @@ namespace OnlineShoppingCart.Controllers
             return View(product);
         }
 
- [HttpPost]
- //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSingleDataList(int id)//, string name,string desc,string productpic,string price,string activationcodes)//int id, [Bind("Id,Name,Description,Price,ProductPic,ActivationCodes")] Product product)
-        {
-            ViewData["id"] = id;
-            // var id1 = RouteData.Values["Id"];// Request.Query["Id"];
-            var formData = Request.Form.ToArray();
-            Product product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                if (formData.Count() == 5)
-                {
-                    product.Name = formData[0].Value;
-                    product.Description = formData[1].Value;
-                    product.Price = formData[2].Value != "" ? Convert.ToDecimal(formData[2].Value) : 0;  
-                    product.ProductPic = formData[3].Value;
-                    product.ActivationCodes = formData[4].Value + "";
-                    try
-                    {
-                        _context.Update(product);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!ProductExists(product.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-            [HttpPost]
+
+       // [HttpPost]
+       // [ValidateAntiForgeryToken]
+       //public async Task<IActionResult> UniqueEditSingleDataList(int id)//,EditSingleDataListP string name,string desc,string productpic,string price,string activationcodes)//int id, [Bind("Id,Name,Description,Price,ProductPic,ActivationCodes")] Product product)
+ 
+       // {
+           
+       // }
+
+
+        [HttpPost]
        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditList(IList<Product> products )
         {      
@@ -372,7 +346,8 @@ namespace OnlineShoppingCart.Controllers
        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,ProductPic,ActivationCodes")] Product product)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && product!=null&& product.Name!=null&& product.Name!="")
             {
                 _context.Product.Add(product);
                 await _context.SaveChangesAsync();
@@ -400,36 +375,74 @@ namespace OnlineShoppingCart.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        //Modified On 20211219 By Madhan KAMALAKANNAN  
         [HttpPost]
        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAt(int id, [Bind("Id,Name,Description,Price,ProductPic,ActivationCodes")] Product product)
-        {
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
-
+        public async Task<IActionResult> EditAt(int id)//, [Bind("Id,Name,Description,Price,ProductPic,ActivationCodes")] Product product)
+        { 
             if (ModelState.IsValid)
             {
-                try
+                ViewData["id"] = id;
+                // var id1 = RouteData.Values["Id"];// Request.Query["Id"];
+                var formData = Request.Form.ToDictionary(x => x.Key, x => x.Value);
+                Product product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+                if (product == null)
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProductExists(product.Id))
+                    if (formData.Count() > 0)
                     {
-                        return NotFound();
+                        foreach (var kvp in formData)
+                        {
+                            if (kvp.Key.Contains("Name", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.Name = formData[kvp.Key]; //formData[0].Value;
+                            }
+                            if (kvp.Key.Contains("Description", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.Description = formData[kvp.Key]; //formData[0].Value;
+                            }
+                            if (kvp.Key.Contains("Quantity", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.Quantity = formData[kvp.Key] != "" ? int.Parse(formData[kvp.Key]) : 0;//formData[0].Value;
+                            }
+                            if (kvp.Key.Contains("Price", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.Price = formData[kvp.Key] != "" ? decimal.Parse(formData[kvp.Key]) : 0;//formData[0].Value;
+                            }
+                            if (kvp.Key.Contains("ProductPic", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.ProductPic = formData[kvp.Key]; //formData[0].Value;
+                            }
+                            if (kvp.Key.Contains("ActivationCodes", StringComparison.OrdinalIgnoreCase))
+                            {
+                                product.ActivationCodes = formData[kvp.Key]; //formData[0].Value;
+                            }
+                        }
+                        try
+                        {
+                            _context.Update(product);
+                            await _context.SaveChangesAsync();
+                        }
+                        catch (DbUpdateConcurrencyException)
+                        {
+                            if (!ProductExists(product.Id))
+                            {
+                                return NotFound();
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
                     }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                } 
+               
             }
-            return View(product);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Products/Delete/5
@@ -451,14 +464,17 @@ namespace OnlineShoppingCart.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+
+        //[ValidateAntiForgeryToken]
+        public ActionResult<string> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var product = _context.Product.Find(id);
+            if(product != null)
+            {  
+                _context.Product.Remove(product);
+                 _context.SaveChanges();
+            }
+            return "done";
         }
 
         private bool ProductExists(int id)
