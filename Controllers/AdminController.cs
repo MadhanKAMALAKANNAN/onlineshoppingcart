@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 namespace OnlineShoppingCart.Controllers
 {
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     //[AllowAnonymous]
     public class AdminController :Controller
     {

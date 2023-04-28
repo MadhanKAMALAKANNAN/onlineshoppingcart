@@ -25,7 +25,7 @@ using OnlineShoppingCart.Models;
 namespace OnlineShoppingCart.Controllers
 {
     //[AllowAnonymous]
-    [Authorize(Roles = "Admin")]
+   //[Authorize(Roles = "Admin")]
    [Route("/admin/Products/{action}")]
     public class ProductsController : Controller
     {
