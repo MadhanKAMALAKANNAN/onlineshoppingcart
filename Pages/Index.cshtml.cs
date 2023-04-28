@@ -2,6 +2,7 @@
  Created : Created 29/Aug/2021
  Modified: 12/Dec/2021  
  */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ using OnlineShoppingCart.Models;
 
 namespace OnlineShoppingCart.Pages
 {
-    public class CheckOut : PageModel
+    public class IndexModel : PageModel
     {
         private readonly OnlineShoppingCart.DB.AsnetidentityContext _context;
 
-        public CheckOut(OnlineShoppingCart.DB.AsnetidentityContext context)
+        public IndexModel(OnlineShoppingCart.DB.AsnetidentityContext context)
         {
             _context = context;
         }
@@ -28,6 +29,7 @@ namespace OnlineShoppingCart.Pages
         public async Task OnGetAsync()
         {
             Product = await _context.Product.ToListAsync();
+            
         }
     }
 }

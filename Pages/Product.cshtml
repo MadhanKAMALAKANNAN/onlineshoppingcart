@@ -1,4 +1,5 @@
-﻿@page
+﻿@*/*Madhan KAMALAKANNAN 29/August/2021 , Madhan.KAMALAKANNAN@outlook.com ,  Madhan.KAMALAKANNAN@gmail.com    */*@
+@page
 @using System.Text.Json;
 @model OnlineShoppingCart.Pages.ProductModel
 
@@ -10,15 +11,15 @@
 								    
 <h1>Product </h1>
 
-<!--===============================================================================================-->
+
 
 <!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
-		<h2 class="l-text2 t-center">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);padding-top:125px">
+		<h2 class="l-text2 t-center" id="h2TagBannerTitle">
 			Women
 		</h2>
 		<p class="m-text13 t-center">
-			New Arrivals Women Collection @DateTime.Now.Year
+			New Arrivals Collection @DateTime.Now.Year
 		</p>
 	</section>
 		
@@ -34,358 +35,46 @@
                             Categories
                         </h4>
                         <!----Side Nav start-->
-                        <div class="S">
+                        <div class="nestedsidemenuA">
 
                         </div>
-                        <!----Side Nav end-->
-                        @*<ul class="Navmain_menu">
-            <li class="p-t-4">
-                <a href="#" class="s-text13 active1">
-                    All
-                </a>
-            </li>
+                      
+ 
+ <!--===============================================================================================-->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
 
-            <li class="" p-t-4">
-                <a href="#" class="">
-                    Women
-                </a>
-                <ul class="Navsub_menu">
-                    <li><a href="/index.html">WssMen1</a></li>
-                    <li>
-                        <a href="/home-02.html">Women1</a>
-                        <ul class="Navsub_menu">
-                            <li><a href="/index.html">WssMen1</a></li>
-                            <li><a href="/home-02.html">Women1</a></li>
-                            <li><a href="/home-03.html">Kids1</a></li>
-                            <li><a href="/home-03.html">Accessories1</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/home-03.html">Kids1</a></li>
-                    <li><a href="/home-03.html">Accessories1</a></li>
-                </ul>
-            </li>
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [ 5, 450 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+      //alert('sd');
+    });
+    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+  } );
 
-            <li class="p-t-4">
-                <a href="#" class="s-text13">
-                    Men
-                </a>
-            </li>
 
-            <li class="p-t-4">
-                <a href="#" class="s-text13">
-                    Kids
-                </a>
-            </li>
+  </script>
+ 
+  <h1 class="m-text14" style="padding-top: 14px;">
+      Price Range <input type="text" id="amount"   style="border:0;color: #f6931f;font-size:12px;font-weight:;"/>
+ </h1>
 
-            <li class="p-t-4">
-                <a href="#" class="s-text13">
-                    Accessories
-                </a>
-            </li>
-        </ul>*@
 
-                        <!--  -->
-                        <h4 class="m-text14 p-b-32">
-                            Filters
-                        </h4>
 
-                        <div class="filter-price p-t-22 p-b-50 bo3">
-                            <div class="m-text15 p-b-17">
-                                Price
-                            </div>
-
-                            <div class="wra-filter-bar">
-                                <div id="filter-bar"></div>
-                            </div>
-
-                            <div class="flex-sb-m flex-w p-t-16">
-                                <div class="w-size11">
-                                    <!-- Button -->
-                                    <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
-                                        Filter
-                                    </button>
-                                </div>
-
-                                <div class="s-text3 p-t-10 p-b-10">
-                                    Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="filter-color p-t-22 p-b-50 bo3">
-                            <div class="m-text15 p-b-12">
-                                Color
-                            </div>
-
-                            <ul class="flex-w">
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-                                    <label class="color-filter color-filter1" for="color-filter1"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-                                    <label class="color-filter color-filter2" for="color-filter2"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-                                    <label class="color-filter color-filter3" for="color-filter3"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-                                    <label class="color-filter color-filter4" for="color-filter4"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-                                    <label class="color-filter color-filter5" for="color-filter5"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-                                    <label class="color-filter color-filter6" for="color-filter6"></label>
-                                </li>
-
-                                <li class="m-r-10">
-                                    <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-                                    <label class="color-filter color-filter7" for="color-filter7"></label>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!----------------------------------------------->
-                        @* <ul class='Navmain_menu'>
-            <li id='li_1'>
-                <a href='' title='Women'> Women </a>
-                <ul class='Navsub_menu'>
-                    <li id='li_4_1'>
-                        <a href='#' title='Accessories'>Accessories</a>
-                        <ul class='Navsub_menu'>
-                            <li id='li_25_4'>
-                                <a href='#' title='Belt'>Belt</a>
-                                <ul class='Navsub_menu'>
-                                    <li id='li_27_25'>
-                                        <a href='#' title='Leather Belt'>Leather Belt</a>
-                                    </li>
-                                    <li id='li_28_25'>
-                                        <a href='#' title='Normal Belt'>Normal Belt </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id='li_26_4'>
-                                <a href='#' title='Hand Lace'>Hand Lace </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id='li_6_1'>
-                        <a href='#' title='Bangles'>Bangles </a>
-                    </li>
-                    <li id='li_7_1'>
-                        <a href='#' title='Watches'>Watches </a>
-                        <ul class='Navsub_menu'>
-                            <li id='li_13_7'>
-                                <a href='#' title='Rolex'>Rolex</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id='li_9_1'>
-                        <a href='#' title='Hand Bags'>Hand Bags </a>
-                        <ul class='Navsub_menu'>
-                            <li id='li_15_9'>
-                                <a href='#' title='Crafted'>Crafted</a>
-                                <ul class='Navsub_menu'>
-                                    <li id='li_16_15'>
-                                        <a href='#' title='CraftedC1'>CraftedC1</a>
-                                        <ul class='Navsub_menu'>
-                                            <li id='li_18_16'>
-                                                <a href='#' title='CraftedC1.1'>CraftedC1.1</a>
-                                            </li>
-                                            <li id='li_19_16'>
-                                                <a href='#' title='CraftedC1.2'>CraftedC1.2 </a>
-                                            </li>
-                                            <li id='li_20_16'>
-                                                <a href='#' title='CraftedC1.3'>CraftedC1.3 </a>
-                                                <ul class='Navsub_menu'>
-                                                    <li id='li_21_20'>
-                                                        <a href='#' title='CraftedC2'>CraftedC2</a>
-                                                        <ul class='Navsub_menu'>
-                                                            <li id='li_22_21'>
-                                                                <a href='#' title='CraftedC2.1'>CraftedC2.1</a>
-                                                            </li>
-                                                            <li id='li_23_21'>
-                                                                <a href='#' title='CraftedC2.2'>CraftedC2.2 </a>
-                                                                <ul class='Navsub_menu'>
-                                                                    <li id='li_24_23'>
-                                                                        <a href='#' title='CraftedC3'>CraftedC3</a>
-                                                                        <ul class='Navsub_menu'>
-                                                                            <li id='li_29_24'>
-                                                                                <a href='#' title='CraftedC3.1'>CraftedC3.1</a>
-                                                                            </li>
-                                                                            <li id='li_30_24'>
-                                                                                <a href='#' title='CraftedC3.2'>CraftedC3.2</a>
-                                                                                <ul class='Navsub_menu'>
-                                                                                    <li id='li_31_30'>
-                                                                                        <a href='#' title='CraftedC4'>CraftedC4</a>
-                                                                                        <ul class='Navsub_menu'>
-                                                                                            <li id='li_32_31'>
-                                                                                                <a href='#' title='CraftedC4.1'>CraftedC4.1</a>
-                                                                                            </li>
-                                                                                            <li id='li_33_31'>
-                                                                                                <a href='#' title='CraftedC4.2'>CraftedC4.2</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id='li_11_1'>
-                        <a href='#' title='Shoes'>Shoes </a>
-                    </li>
-                </ul>
-            </li>
-            <li id='li_2'>
-                <a href='' title='Men'> Men </a>
-                <ul class='Navsub_menu'>
-                    <li id='li_5_2'>
-                        <a href='#' title='Accessories'>Accessories</a>
-                    </li>
-                    <li id='li_8_2'>
-                        <a href='#' title='Watches'>Watches </a>
-                        <ul class='Navsub_menu'>
-                            <li id='li_14_8'>
-                                <a href='#' title='Rolex'>Rolex</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id='li_10_2'>
-                        <a href='#' title='Hand Bags'>Hand Bags </a>
-                        <ul class='Navsub_menu'>
-                            <li id='li_17_10'>
-                                <a href='#' title='Crafted'>Crafted</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id='li_12_2'>
-                        <a href='#' title='Shoes'>Shoes </a>
-                    </li>
-                </ul>
-            </li>
-            <li id='li_3'>
-                <a href='' title='Kids'> Kids </a>
-            </li>
-        </ul>*@
-
-                        @*<div class="nestedsidemenu">
-            <ul>
-                <li><a href="#">Item 1</a></li>
-                <li>
-                    <a href="javascript:vold(0)">Folder 1</a>
-                    <ul>
-                        <li><a href="#">Sub Item 1.1</a></li>
-                        <li><a href="#">Sub Item 1.2</a></li>
-                        <li><a href="#">Sub Item 1.3</a></li>
-                        <li><a href="#">Sub Item 1.4</a></li>
-                        <li><a href="#">Sub Item 1.2</a></li>
-                        <li><a href="#">Sub Item 1.3</a></li>
-                        <li><a href="#">Sub Item 1.4</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:vold(0)">Folder 2</a>
-                    <ul>
-                        <li><a href="#">Sub Item 2.1</a></li>
-                        <li><a href="#">Sub Item 2.2</a></li>
-                        <li>
-                            <a href="javascript:vold(0)">Folder 2.3</a>
-                            <ul>
-                                <li><a href="#">Sub Item 2.3.1</a></li>
-                                <li><a href="#">Sub Item 2.3.2</a></li>
-                                <li><a href="#">Sub Item 2.3.3</a></li>
-                                <li><a href="#">Sub Item 2.3.4</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Sub Item 2.4</a></li>
-                        <li><a href="#">Sub Item 2.5</a></li>
-                        <li><a href="#">Sub Item 2.6</a></li>
-                        <li><a href="#">Sub Item 2.7</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Item 3</a></li>
-                <li>
-                    <a href="javascript:vold(0)">Folder 3</a>
-                    <ul>
-                        <li><a href="#">Sub Item 3.1</a></li>
-                        <li>
-                            <a href="javascript:vold(0)">Folder 3.2</a>
-                            <ul>
-                                <li><a href="#">Sub Item 3.2.1</a></li>
-                                <li><a href="#">Sub Item 3.2.2</a></li>
-                                <li>
-                                    <a href="javascript:vold(0)">Folder 3.2.3</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Sub Item 3.2.3.1</a>
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Sub Item 3.2.3.1.1</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">Sub Item 3.2.3.1.1.1</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Sub Item A</a>
-                                                                    <ul>
-                                                                        <li><a href="#">Sub Item A.1</a></li>
-                                                                        <li><a href="#">Sub Item B.1</a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li><a href="#">Sub Item B</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a href="#">Sub Item 3.2.3.2.2.2</a></li>
-                                                        <li><a href="#">Sub Item 3.2.3.3.3.3</a></li>
-                                                        <li><a href="#">Sub Item 3.2.3.4.4.4</a></li>
-                                                        <li><a href="#">Sub Item 3.2.3.5.5.5</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Sub Item 3.2.3.2.2</a></li>
-                                                <li><a href="#">Sub Item 3.2.3.3.3</a></li>
-                                                <li><a href="#">Sub Item 3.2.3.4.4</a></li>
-                                                <li><a href="#">Sub Item 3.2.3.5.5</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Sub Item 3.2.3.2</a></li>
-                                        <li><a href="#">Sub Item 3.2.3.3</a></li>
-                                        <li><a href="#">Sub Item 3.2.3.4</a></li>
-                                        <li><a href="#">Sub Item 3.2.3.5</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Sub Item 3.2.4</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="https://twitter.com/ddrivegeorge">Twitter</a></li>
-            </ul>
-        </div>*@
-
-                        <!----------------------------------------------------------->
-
+ 
+<div id="slider-range"></div>
+ 
+ 
                     </div>
                     </div> 
 
@@ -394,120 +83,47 @@
                     <div class="flex-sb-m flex-w p-b-35">
                         <div class="flex-w" style="padding_:10px" >
 
-                            @*<span class="s-text8 p-t-5 p-b-5">
-            Showing 1–12 of 16 results
-        </span>*@
+         
                             <div class="search-product pos-relative bo4 of-hidden">
+                                 @* <form  method="post">*@
+                                     
+                               <input id="searchWord" class="s-text7_ size6_ p-l-23_ p-r-50_" style="width:500px;border-color:aqua;border-width:1px" type="text" name="searchProduct" placeholder="Search Products..."/>
 
-                                @using (@Html.BeginForm("SearchProducts", "Product", FormMethod.Post))
-                                {                             <input class="s-text7_ size6_ p-l-23_ p-r-50_" style="width:500px;border-color:aqua;border-width:1px" type="text" name="search-product" placeholder="Search Products...">
-
-                                <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="submit">
-                                    <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                                </button>
-                                    }
-                            </div>
-
+                                <button id="btnSearchProduct" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4" type="button"      value="Submit">
+                               <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+                               </button>
+                                   @* }*@
+                          
+                           @* </form> *@ </div>
                             <div class="search-product pos-relative bo4 of-hidden" style="padding-left:10px" >
-                                <select class="selection-2" name="sorting">
-                                    <option>Default Sorting</option>
-                                    <option>Popularity</option>
+                                <select class="selection-2" name="sorting" id="SelectSorting" onchange="ChangeSort()">
+                                   @* <option>Default Sorting</option>
+                                    <option>Popularity</option>*@
                                     <option>Price: low to high</option>
                                     <option>Price: high to low</option>
                                 </select>
                             </div>
 
-                            @*<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                                <select class="selection-2" name="sorting">
-                                    <option>Price</option>
-                                    <option>$0.00 - $50.00</option>
-                                    <option>$50.00 - $100.00</option>
-                                    <option>$100.00 - $150.00</option>
-                                    <option>$150.00 - $200.00</option>
-                                    <option>$200.00+</option>
-
-                                </select>
-                            </div>*@
+               
                         </div>
                     </div>
-                    <!-- Product -->
-                    <div class="row">
-
-                    @{
-                        foreach (var eachPrd in Model.Product)
-                        {
-                            <div style="padding-left:;" class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                                <!-- Block2 -->
-                                    <div class="block2">
-                                    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                        @if(@eachPrd.ProductPic == "" || @eachPrd.ProductPic == null)
-                                        {
-                                             <img id="img_@eachPrd.Id" src="~/images/item-02.jpg" alt="IMG-PRODUCT">
-                                        }else
-                                        {
-                                           <img id="img_@eachPrd.Id" src="@eachPrd.ProductPic" alt="IMG-PRODUCT">  
-                                        }
-                                                
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button onclick="AddtoCart('@eachPrd.Id')" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Add to Cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div style="padding-left:25%;" class="block2-txt p-t-20" title="@eachPrd.Description">
-                                        <div style="padding-left:25%;"> <label class="color-filterImg color-filter2Img" for="color-filter1s" onclick="NavImg(this,@eachPrd.Id)"></label>  <label class="color-filterImg color-filter2Img" for="color-filter1" onclick="NavImg(this,@eachPrd.Id)"></label> </div>
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                <!---Herschel supply co 25l-->
-                                                @eachPrd.Name  <span class="block2-price m-text6 p-r-5">
-                                                <!--$75.00-->
-                                                $@eachPrd.Price
-                                            </span>
-                                            </a>
-
-                                          
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-
-                            }
-
-                        }	 
-     
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination flex-m flex-w p-t-26">
-                        <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                        <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-                    </div>
+ <!-- ProductList---------------------------------->
+ <div id="divProducts"></div>
+ <!-- ProductList--------End-------------------------->
+                  
                 </div>
 			</div>
 		</div>
 	</section>
  
-	
-	
 	<!----------------------------------------------->
 
-
- 
  
 <div id="divliTemplate" style="display:none">
       <ul>
 <li id="~liPrdId~" class="header-cart-item">
 	<div class="header-cart-item-img">
-		<img src="~PRODUCTPIC~" alt="IMG">
+		<img width="260px" height="325px" src="~PRODUCTPIC~" alt="IMG">
 	</div>																											
 
 	<div class="header-cart-item-txt">
@@ -521,12 +137,145 @@
  
 
 <script>
-		  
+		    var  selectSortingOption ="";
+            var currentPageGlb = 1;
+            var pageLinkObjGlb = "";
+             
     $(document).ready(function () {
+         
         LoadSideMenu();
+        // alert('fghfghfghfgh');
+            selectSortingOption = $('#SelectSorting option:selected').val() ;
+            // alert('ertyr');
+          LoadProducts("",0,selectSortingOption,currentPageGlb,"");
+  
+
 	  });
-	  	    
-     
+
+ function CallThisMethod(currentPage,pageLinkObj)
+{ 
+
+    if(pageLinkObj=="")
+    {
+      pageLinkObj =  "#a_"+currentPage;
+    }
+
+  pageLinkObjGlb = pageLinkObj; 
+  currentPageGlb = currentPage; 
+  CallToLoad("",""); 
+}
+
+    function CallToLoad(filterWord, categoryName) {  
+   // alert('filterWord:'+filterWord);
+    var  selectSortingOption = $('#SelectSorting option:selected').val() ;
+    var priceRange = $("#amount").val();
+    LoadProducts("Product?handler=SearchProducts",priceRange,selectSortingOption,currentPageGlb,filterWord);
+        
+        if (categoryName!='')
+        {
+            $('#h2TagBannerTitle').html(categoryName);
+        }
+        //cateParentNode.CategoryName
+        //
+
+}
+
+$("#btnSearchProduct").click(function (e) {
+
+    var ttxtObj = "#searchWord";
+    vTxtObj = $(ttxtObj).val();
+  
+    if (vTxtObj == "" || vTxtObj == null) {
+      e.preventDefault(); 
+    }
+    else
+    {    
+       CallThisMethod(currentPageGlb,"");
+    }
+});
+
+ $("#btnSearchProduct").dblclick(function (e) {
+     window.location.href="Product";
+ });
+
+   $("#amount").click(function (e) {
+
+            //alert( $("#amount").val() );
+   });
+    
+   $("#amount").change(function (e) {
+
+          // alert($(this).val() );
+   });
+
+ $( "#slider-range").click(function (e) {
+
+     CallThisMethod(currentPageGlb,"");
+
+   });
+
+
+function ChangeSort()
+{
+   //alert(currentPageGlb);
+     CallThisMethod(currentPageGlb,"");
+}
+function SetBGColor()
+{
+   if(pageLinkObjGlb!="")
+   {
+     //alert('SetBGColor:'+$(pageLinkObjGlb).attr("id"));//cssColor
+        $(pageLinkObjGlb).css("background-color","#895b7d;");
+   }
+}
   </script>
 
+  <script>
+ 
+function LoadProducts(purl,priceRange,selectSortingOption,currentPage,filterWord) {
+      
+   var searchMode ="1";
+
+    var urlForProds= purl;
+      if(purl==""){
+            urlForProds= "Product?handler=SearchProducts"; //"Product?handler=Products";
+      }
+     
+      var srchWrd = $("#searchWord").val();
+      if(filterWord!="")
+      {
+        searchMode ="0";//Side Menu click Event
+        srchWrd = filterWord ;
+
+         $("#searchWord").val('');
+      }
+    
+    $.ajax({
+        type: "GET",
+        url: urlForProds,
+         data: { searchWord: srchWrd,priceRange:priceRange,selectSortingOption:selectSortingOption,currentPage:currentPage,searchMode:searchMode },
+    
+       //data: { jsonInput: jsonInput1 },
+        contentType: "application/json; charset=utf-8",
+        dataType: "html",
+        success: function (response) {
+
+             $('#divProducts').html(response);  
+            //$("#searchWord").val(@TempData["searchWord"]); 
+            // console.info('LoadProducts:'+response );
+            SetBGColor();
+        },
+        failure: function (response) {
+           //alert("failure:"+response.responseText);
+        },
+        error: function (response) {
+           // alert(response.responseText);
+            $('#divProducts').html('');
+            $('#divProducts').append(response.responseText);
+        }
+    });
+} 
+     
+  </script>
+ 
  
