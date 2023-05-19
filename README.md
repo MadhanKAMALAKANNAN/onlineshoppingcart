@@ -1,4 +1,4 @@
-# onlineshoppingcart 
+# onlineshoppingcart : Developed using Asp.Net core, .net entity framework,MS SQL .
 
 User Screen 
 
