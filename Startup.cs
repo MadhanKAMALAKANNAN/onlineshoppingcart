@@ -138,7 +138,7 @@ namespace OnlineShoppingCart
                    pattern: "Admin/{controller=Products}/{action=Index}/{id?}");
 
 
-                endpoints.MapRazorPages();//.RequireAuthorization();
+                endpoints.MapRazorPages().RequireAuthorization();
 
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();
 
